@@ -18,6 +18,32 @@ router.get('/', async (req, res) => {
   return res.render('index', { ways, user });
 });
 
+
+router.get('/sort/:id', async (req, res) => {
+  let ways;
+  let user
+  console.log(req.params.id)
+  try {
+    console.log(res.locals?.username)
+    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
+
+    if(req.params.id == 1) ways = await Way.findAll({order:[['id', 'ASC']], raw:true});
+    if(req.params.id == 2) ways = await Way.findAll({order:[['createdAt', 'DESC']], raw:true});
+    if(req.params.id == 3) ways = await Way.findAll({order:[['createdAt', 'ASC']], raw:true});
+    else ways = await Way.findAll({order:[['id', 'DESC']], raw:true});
+  } catch (error) {
+    return res.render('error', {
+      message: 'Не удалось получить записи из базы данных.',
+      error: {}
+    });
+  }
+  console.log(ways)
+  return res.json({ ways });
+});
+
+
+
+
 router.post('/', async (req, res) => {
   
   try {
