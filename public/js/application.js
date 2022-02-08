@@ -2,7 +2,7 @@ const selector = document.getElementsByName('differentSort')[0];
 const routesList = document.getElementsByClassName('routes')[0];
 
 
-selector.addEventListener('click', async () => {
+  selector?.addEventListener('click', async () => {
     console.log(selector.value)
     // отправляем фетч на запрос сортировки и отрисовки
     // можем принять их все из фича и отрисовать динамически
@@ -15,5 +15,8 @@ selector.addEventListener('click', async () => {
       ways.forEach(way => {
         routesList.innerHTML += renderWayList(way)
       });
+
   })
+
+
 

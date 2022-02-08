@@ -10,6 +10,19 @@
   <title>Велопрогулка</title>
   <script defer src='/js/application.js'></script>
   <script defer src='/js/renderHTML.js'></script>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU & onload=init" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+                    
+                    function init() {
+                      var myMap = new ymaps.Map("map", {
+                        center: [55.76, 37.64],
+                        zoom: 7
+                      });
+                    }
+                    ymaps.ready(init);
+  </script>
+
   {{#if isSignin}}
   <script defer src='/js/signin.js'></script>
   {{/if}}

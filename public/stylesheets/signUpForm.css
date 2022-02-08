@@ -66,3 +66,16 @@ b{
   color: black;
 }
 
+.mainConteiner{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  padding-top: 30px;
+  padding-left: 20px;
+}
+
+.inform{
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  }
