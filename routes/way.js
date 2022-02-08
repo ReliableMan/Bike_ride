@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const {} = require('../db/models/');
+const {Way} = require('../db/models/');
 
 router.get('/', async (req, res) => {
   let ways;
 
   try {
-    ways = await Entry.findAll({order:[['id', 'DESC']]});
+    ways = await Way.findAll({order:[['id', 'DESC']]});
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить записи из базы данных.',
@@ -13,13 +13,13 @@ router.get('/', async (req, res) => {
     });
   }
 
-  return res.render('ways/index', { ways });
+  return res.render('index', { ways });
 });
 
 router.post('/', async (req, res) => {
   
   try {
-    const newWay = await .create({ title: req.body.title, body: req.body.body },{returning: true,plain: true});
+    const newWay = await Way.create({ title: req.body.title, body: req.body.body },{returning: true,plain: true});
     return res.redirect(`/ways/${newWay.id}`);
   } catch (error) {
     res.render('error', {
@@ -39,7 +39,7 @@ router.get('/:id', async (req, res) => {
   let way;
 
   try {
-    way = await .findOne({where:{id:req.params.id}});
+    way = await Way.findOne({where:{id:req.params.id}});
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить запись из базы данных.',
@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
   let way;
 
   try {
-    way = await .update({ title: req.body.title, body: req.body.body },{where:{id:req.params.id}, returning: true, plain: true});
+    way = await Way.update({ title: req.body.title, body: req.body.body },{where:{id:req.params.id}, returning: true, plain: true});
   } catch (error) {
     return res.json({ isUpdateSuccessful: false, errorMessage: 'Не удалось обновить запись в базе данных.' });
   }
@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    await .destroy({where:{id:req.params.id}});
+    await Way.destroy({where:{id:req.params.id}});
   } catch (error) {
     return res.json({ isDeleteSuccessful: false, errorMessage: 'Не удалось удалить запись из базы данных.' });
   }
@@ -73,7 +73,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.get('/:id/edit', async (req, res) => {
-  let way = await .findOne({where:{id:req.params.id}});
+  const way = await Way.findOne({where:{id:req.params.id}});
   res.render('ways/edit', { way });
 });
 

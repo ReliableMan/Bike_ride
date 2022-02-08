@@ -30,7 +30,7 @@ exports.createUserAndSession = async (req, res, next) => {
     console.error('Err code', err.code);
     return failAuth(res, err.message);
   }
-  res.redirect('/entries') // ответ 200 + автоматическое создание и отправка cookies в заголовке клиенту
+  res.redirect('/') // ответ 200 + автоматическое создание и отправка cookies в заголовке клиенту
 };
 
 exports.checkUserAndCreateSession = async (req, res, next) => {
@@ -51,7 +51,7 @@ exports.checkUserAndCreateSession = async (req, res, next) => {
     console.error('Err code', err.code);
     return failAuth(res, err.message);
   }
-  res.redirect('/entries') // ответ 200 + автоматическое создание и отправка cookies в заголовке клиенту
+  res.redirect('/') // ответ 200 + автоматическое создание и отправка cookies в заголовке клиенту
 };
 
 exports.destroySession = (req, res, next) => {
@@ -62,11 +62,11 @@ exports.destroySession = (req, res, next) => {
   });
 }
 
-exports.renderSignInForm = (req, res) => res.render('entries/signin', { isSignin: true });
+exports.renderSignInForm = (req, res) => res.render('signin', { isSignin: true });
 
-exports.renderSignUpForm = (req, res) => res.render('entries/signup', { isSignup: true });
+exports.renderSignUpForm = (req, res) => res.render('signup', { isSignup: true });
 
-exports.renderProfile = (req, res) => res.render('entries/profile', { isSignin: true });
+exports.renderProfile = (req, res) => res.render('profile', { isSignin: true });
 
 /**
  * Завершает запрос с ошибкой аутентификации
