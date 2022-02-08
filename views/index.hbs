@@ -1,24 +1,46 @@
- {{!-- {{#if userName}} --}}
-  <a href="/entries/new" class="block button w-100 mar-t-2 mar-b-3 pad-2 round-1 text-c center">Новая запись(маршрут)</a>
-{{!-- {{else}}
-  <a href="/entries/new" class="block button w-100 mar-t-2 mar-b-3 pad-2 round-1 text-c center">Write about Broccoli</a>
-{{/if}} --}}
-
-<main role="main" class="place">
-  <ul class="entries-list no-bullets no-padding">
-    Путь к успеху!
-    {{!-- {{#each entries}} --}}
-      {{!-- <li class="entry-item pad-b-4">
-        <a href="/entries/{{id}}" class="entry-title font-2 pad-b-1-4 c-white" id="{{id}}">{{this.title}}</a>
-        <span class="entry-date block font-3-4 c-lt-gray">Written on {{this.createdAt}}</span>
-        <p class="entry-stub">{{this.body}}</p> --}}
-        {{!-- {{#if this.likesUser}}
-          <button class="offlikeBtn" id="on"><img type="button" src="/images/like-ok.png" style="max-height: 30px; max-width: 30px;" class="offlikeImg" id="{{id}}" alt=""></button><span class="entry-stub valueLike">{{this.likes}}</span>
-        {{else}}
-          <button class="offlikeBtn" id="off"><img type="button" src="/images/like-off.png" style="max-height: 30px; max-width: 30px;" class="offlikeImg" id="{{id}}" alt=""></button><span class="entry-stub valueLike">{{this.likes}}</span>
-        {{/if}} --}}
-      {{!-- </li>
-    {{/each}} --}}
-  </ul>
-</main>
-
+<div class="sort">
+  <select name="differentSort" class="differentSort">
+    <option value="1">По рейтингу</option>
+    <option value="2">По дате</option>
+    <option value="3">По длине маршрута</option>
+  </select>
+</div>
+<div class="routes">
+  <div class="rout">
+    <img src="https://chekogo.com/wp-content/uploads/2016/12/Castle-Valley.jpg" class="img" width="200px"
+      height="200px">
+    <h3>Маршрут1</h3>
+    <button class="btn" id="route1">Перейти</button>
+    <p>Рейтинг: </p>
+  </div>
+  <div class="rout">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOTVEDH1zvBmZoeMBO7944rv3KoukZ5PIWDA&usqp=CAU"
+      class="img" width="200px" height="200px">
+    <h3>Маршрут2</h3>
+    <button class="btn" id="route2">Перейти</button>
+    <p>Рейтинг: </p>
+  </div>
+  <div class="rout">
+    <img src="https://livingasia.online/wp-content/uploads/2020/08/pastbishe-97-scaled.jpg" class="img" width="200px"
+      height="200px">
+    <h3>Маршрут3</h3>
+    <button class="btn" id="route3">Перейти</button>
+    <p>Рейтинг: </p>
+  </div>
+  <div class="rout">
+    <img src="https://geographyofrussia.com/wp-content/uploads/2009/05/6122.jpg" class="img" width="200px"
+      height="200px">
+    <h3>Маршрут4</h3>
+    <button class="btn" id="route4">Перейти</button>
+    <p>Рейтинг: </p>
+  </div>
+   {{#each ways}}
+  <div class="rout" id="{{this.id}}">
+    <img src="https://geographyofrussia.com/wp-content/uploads/2009/05/6122.jpg" alt="sfgdsfghfd" class="img" width="200px"
+      height="200px">
+    <h3>{{this.title}}</h3>
+    <button class="btn" id="route4">Перейти</button>
+    <p>Рейтинг: </p>
+  </div>
+  {{/each}}
+</div>
