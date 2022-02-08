@@ -1,0 +1,5 @@
+PORT=3000
+DB_URL_DEV=postgres://postgres:7825537@localhost:5432/bikerace
+DB_URL_TEST=postgres://postgres:7825537@localhost:5432/bikerace
+DB_URL_PROD=postgres://zhaqhsbmjeqoiq:bb37221f654437dbc8245a4dee5e8b786799e95d32245d4b7003742f7aeb72f4@ec2-54-155-61-133.eu-west-1.compute.amazonaws.com:5432/d2lifcioqej9gb
+COOKIE_SECRET=ldilsdfghi7687ikjnetlhjeo
