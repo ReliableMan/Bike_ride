@@ -1,0 +1,18 @@
+{
+  "development": {
+    "use_env_variable": "DB_URL",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "use_env_variable": "DB_URL_TEST_DB",
+    "host": "127.0.0.1",
+    "dialect": " postgres "
+  },
+  "production": {
+    "use_env_variable": "DB_URL_PROD_DB",
+    "host": "127.0.0.1",
+    "dialect": " postgres "
+  }
+}
+
