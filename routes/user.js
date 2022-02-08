@@ -1,3 +1,5 @@
+const {Way, User} = require('../db/models/');
+
 const express = require('express');
 const {
   checkUserAndCreateSession,
@@ -32,10 +34,17 @@ router.get('/signout', destroySession);
 router.get('/profile', renderProfile )
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
+  let user
+
+  try {
+    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
+  } catch (error) {
+    
+  }
   // res.render('error')
   // console.log(req.query)
-  res.send('drfgtdfhbdtfhb')
+  res.render('infoRoad', {user})
 })
 
 
