@@ -1,10 +1,12 @@
 const router = require('express').Router();
-const {Way} = require('../db/models/');
+const {Way, User} = require('../db/models/');
 
 router.get('/', async (req, res) => {
   let ways;
-
+  let user
   try {
+    console.log(res.locals?.username)
+    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
     ways = await Way.findAll({order:[['id', 'DESC']]});
   } catch (error) {
     return res.render('error', {
@@ -12,8 +14,8 @@ router.get('/', async (req, res) => {
       error: {}
     });
   }
-
-  return res.render('index', { ways });
+  console.log(user)
+  return res.render('index', { ways, user });
 });
 
 router.post('/', async (req, res) => {
