@@ -62,9 +62,9 @@ exports.destroySession = (req, res, next) => {
   });
 }
 
-exports.renderSignInForm = (req, res) => res.render('signin', { isSignin: true });
+exports.renderSignInForm = (req, res) => res.render('signIn', { isSignin: true });
 
-exports.renderSignUpForm = (req, res) => res.render('signup', { isSignup: true });
+exports.renderSignUpForm = (req, res) => res.render('signUp', { isSignup: true });
 
 exports.renderProfile = (req, res) => res.render('profile', { isSignin: true });
 
