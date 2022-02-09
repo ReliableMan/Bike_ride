@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Way, User} = require('../db/models/');
+const {Way, User, Comment} = require('../db/models/');
 
 router.get('/', async (req, res) => {
   let ways;
@@ -41,7 +41,22 @@ router.get('/sort/:id', async (req, res) => {
   return res.json({ ways });
 });
 
-
+router.post('/comment', async (req, res) => {
+  let newComment;
+  let user;
+  // console.log('fsdgdfgfhfjhfdjh0')
+  try {
+    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
+    // console.log(req.body.text, req.body.rating, req.body.way_id, user.id)
+    newComment = await Comment.create({ text: req.body.text, rating: req.body.rating, user_id: user.id, way_id: req.body.way_id});
+    // console.log('fsdgdfgfhfjhfdjh2')
+    // console.log(newComment)
+  } catch (error) {
+    return res.json({ isUpdateSuccessful: false, errorMessage: 'Не удалось обновить запись в базе данных.' });
+  }
+  
+  return res.json({ newComment });
+});
 
 
 router.post('/', async (req, res) => {
@@ -65,7 +80,7 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', async (req, res) => {
   let way;
-
+  // console.log(req.params.id)
   try {
     way = await Way.findOne({where:{id:req.params.id}});
   } catch (error) {
@@ -75,7 +90,7 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  return res.render('ways/show', { way });
+  return res.render('infoRoad', { way });
 });
 
 router.put('/:id', async (req, res) => {
