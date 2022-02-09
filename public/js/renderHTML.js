@@ -14,7 +14,7 @@ function renderWayList(way) {
 function renderNewComment(newComment) {
   return `<li style="border: 1px solid black;">
               <div id="comment"></div>
-                  <h3><b>User: ${newComment.user_id}</b></h3> <span>${newComment.rating}</span>
+                  <h3><b>User: ${newComment.user_id} (Пока что это id Пользователя)</b></h3> <span>${newComment.rating}</span>
                   <p>Отзыв: ${newComment.text}</p>
             </li>`
 }
