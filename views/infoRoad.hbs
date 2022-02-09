@@ -1,5 +1,6 @@
 {{#if way}}
 
+
  <div class="mainConteiner" id="{{way.id}}">
       <div id="map" style="width: 600px; height: 400px"></div>
       <div class="inform">
@@ -18,13 +19,17 @@
                             </select></p>
         <textarea name="message" ></textarea>
 
-        <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
-         
-        
-      </div>
- 
 
-    </div>
+    <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
+
+
+
+  </div>
+
+
+
+
+
     <div>Отзывы: </div>
 <ul id="comentList">
              {{#each comment}}
@@ -36,3 +41,4 @@
           {{/each}}
           </ul>
  {{/if}}
+
