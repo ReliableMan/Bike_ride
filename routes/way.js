@@ -80,9 +80,14 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', async (req, res) => {
   let way;
+  let comment;
+  let rating;
   // console.log(req.params.id)
   try {
-    way = await Way.findOne({where:{id:req.params.id}});
+    way = await Way.findOne({where:{id:req.params.id}, raw: true});
+    comment = await Comment.findAll({where:{way_id: way.id}, raw: true});
+    way.rating = (comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2);
+    console.log(comment.length)
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить запись из базы данных.',
@@ -90,7 +95,7 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  return res.render('infoRoad', { way });
+  return res.render('infoRoad', { way, comment });
 });
 
 router.put('/:id', async (req, res) => {
