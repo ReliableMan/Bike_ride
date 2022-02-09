@@ -60,3 +60,20 @@ function init() {
     },
   });
 }
+
+
+
+
+const obj = {}
+// const arr = document.getElementsByClassName()
+// VM1010:1 Uncaught TypeError: Failed to execute 'getElementsByClassName' on 'Document': 1 argument required, but only 0 present.
+//     at <anonymous>:1:22
+// (anonymous) @ VM1010:1
+const arr = document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')
+// undefined
+// var arr3 = Array.prototype.slice.call( obj.arr )
+// var arr2 = Array.from(obj.arr);
+
+// VM1084:1 (2) [input.ymaps-2-1-79-route-panel-input__input, input.ymaps-2-1-79-route-panel-input__input]
+// undefined
+console.log(arr[1])

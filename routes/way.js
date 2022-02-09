@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
   console.log(user)
   return res.render('index', { ways, user });
 });
-
+// ////////////////////////////////////////////////////////////
 // С ФЕТЧА
 router.get('/sort/:id', async (req, res) => {
   let ways;
@@ -57,9 +57,9 @@ router.get('/sort/:id', async (req, res) => {
     });
   }
   
-  return res.json({ ways });
+  return res.json({ ways, user });
 });
-
+// ////////////////////////////////////////////////////////////
 router.post('/comment', async (req, res) => {
   let newComment;
   let user;
@@ -80,7 +80,7 @@ router.post('/comment', async (req, res) => {
   return res.json({ newComment, newRating });
 });
 
-
+// ////////////////////////////////////////////////////////////
 router.post('/', async (req, res) => {
   
   try {
@@ -95,21 +95,23 @@ router.post('/', async (req, res) => {
 
   return res.redirect(`/ways/${newWay.id}`);
 });
-
-router.get('/new', (req, res) => {
-  res.render('ways/new');
-});
-
+// ////////////////////////////////////////////////////////////
+// router.get('/new', (req, res) => {
+//   res.render('ways/new');
+// });
+// ////////////////////////////////////////////////////////////
 router.get('/:id', async (req, res) => {
   let way;
+  let user;
   let comment;
-  let rating;
+  // let rating;
   // console.log(req.params.id)
   try {
+    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
     way = await Way.findOne({where:{id:req.params.id}, raw: true});
     comment = await Comment.findAll({where:{way_id: way.id}, raw: true});
     way.rating = (comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2);
-    console.log(comment.length)
+    // console.log(comment.length)
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить запись из базы данных.',
@@ -117,35 +119,34 @@ router.get('/:id', async (req, res) => {
     });
   }
 
-  return res.render('infoRoad', { way, comment });
+  return res.render('infoRoad', { way, comment, user });
 });
+// ////////////////////////////////////////////////////////////
+// router.put('/:id', async (req, res) => {
+//   let way;
 
-router.put('/:id', async (req, res) => {
-  let way;
+//   try {
+//     way = await Way.update({ title: req.body.title, body: req.body.body },{where:{id:req.params.id}, returning: true, plain: true});
+//   } catch (error) {
+//     return res.json({ isUpdateSuccessful: false, errorMessage: 'Не удалось обновить запись в базе данных.' });
+//   }
 
-  try {
-    way = await Way.update({ title: req.body.title, body: req.body.body },{where:{id:req.params.id}, returning: true, plain: true});
-  } catch (error) {
-    return res.json({ isUpdateSuccessful: false, errorMessage: 'Не удалось обновить запись в базе данных.' });
-  }
-
-  return res.json({ isUpdateSuccessful: true, wayID: way[1].id });
-});
-
-router.delete('/:id', async (req, res) => {
-  try {
-    await Way.destroy({where:{id:req.params.id}});
-  } catch (error) {
-    return res.json({ isDeleteSuccessful: false, errorMessage: 'Не удалось удалить запись из базы данных.' });
-  }
-
-  return res.json({ isDeleteSuccessful: true });
-});
-
-router.get('/:id/edit', async (req, res) => {
-  const way = await Way.findOne({where:{id:req.params.id}});
-  res.render('ways/edit', { way });
-});
+//   return res.json({ isUpdateSuccessful: true, wayID: way[1].id });
+// });
+// ////////////////////////////////////////////////////////////
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     await Way.destroy({where:{id:req.params.id}});
+//   } catch (error) {
+//     return res.json({ isDeleteSuccessful: false, errorMessage: 'Не удалось удалить запись из базы данных.' });
+//   }
+//   return res.json({ isDeleteSuccessful: true });
+// });
+// ////////////////////////////////////////////////////////////
+// router.get('/:id/edit', async (req, res) => {
+//   const way = await Way.findOne({where:{id:req.params.id}});
+//   res.render('ways/edit', { way });
+// });
 
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const {Way, User} = require('../db/models/');
+const {Way, User, UserInfo} = require('../db/models/');
 
 const express = require('express');
 const {
@@ -33,19 +33,79 @@ router
 router.get('/signout', destroySession);
 router.get('/profile', renderProfile )
 
-
-router.get('/:id', async (req, res) => {
+// ////////////////////////////////////////////////////////////
+router.get('/edit/:id', async (req, res) => {
   let user
-
+  // let userInfo;
   try {
-    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
+    user = await User.findOne({
+      where: {name: res.locals?.username},
+      include: [{
+        model: UserInfo,
+        attributes: ['bike', 'city', 'about_me', 'age']
+      }],
+       raw: true
+      })
+
   } catch (error) {
     
   }
-  // res.render('error')
-  // console.log(req.query)
-  res.render('infoRoad', {user})
+  user.age = user['UserInfo.age']
+  user.about_me = user['UserInfo.about_me']
+  user.city = user['UserInfo.city']
+  user.bike = user['UserInfo.bike']
+
+  res.render('editProfile', {user})
+})
+// ////////////////////////////////////////////////////////////
+router.put('/edit/:id', async (req, res) => {
+  // let user
+  // let userInfo;
+  // console.log('------------------')
+  console.log('------------------', req.body)
+  try {
+    const editUser = UserInfo.update({
+        city: req.body.city, 
+        bike: req.body.bike ,
+        age: req.body.age,
+        about_me: req.body.about_me,
+        // role: req.body.age
+      },
+       {where:{user_id:req.body.user_id}});
+  } catch (error) {
+    
+  }
+  res.json({})
+})
+// ////////////////////////////////////////////////////////////
+router.get('/:id', async (req, res) => {
+  let user
+  let userInfo;
+  try {
+
+    user = await User.findOne({
+      where: {name: res.locals?.username},
+      include: [{
+        model: UserInfo,
+        attributes: ['bike', 'city', 'about_me', 'age']
+      }],
+       raw: true
+      })
+
+  } catch (error) {
+    
+  }
+
+  user.age = user['UserInfo.age']
+  user.about_me = user['UserInfo.about_me']
+  user.city = user['UserInfo.city']
+  user.bike = user['UserInfo.bike']
+  if (user['UserInfo.role'] === 'admin' || user.id) user.userHome = true
+  res.render('userProfile', {user})
 })
 
 
 module.exports = router;
+
+
+
