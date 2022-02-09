@@ -1,11 +1,11 @@
 const selector = document.getElementsByName('differentSort')[0];
 const routesList = document.getElementsByClassName('routes')[0];
-const infoBtn = [...document.getElementsByClassName('btnInfo')];
+let infoBtn = [...document.getElementsByClassName('btnInfo')];
 const btnSubmitComment = document.getElementsByName('submit_btn')[0];
 const selectorRating = document.getElementsByName('selectorRating')[0];
 const commentMessage = document.getElementsByName('message')[0];
 const infoWayOne = [...document.getElementsByClassName('mainConteiner')];
-
+const comentList = document.getElementById('comentList');
 console.log(infoBtn)
   selector?.addEventListener('click', async () => {
     console.log(selector.value)
@@ -21,14 +21,22 @@ console.log(infoBtn)
         routesList.innerHTML += renderWayList(way)
       });
       infoBtn = [...document.getElementsByClassName('btnInfo')];
+      infoBtn?.forEach((el,index) => {
+        el.addEventListener('click', () => {
+          window.location = `http://localhost:3000/ways/${el.id}`
+        })
+      })
   })
 
-infoBtn.forEach((el,index) => {
+
+
+infoBtn?.forEach((el,index) => {
     el.addEventListener('click', () => {
       window.location = `http://localhost:3000/ways/${el.id}`
-      // console.log(el.id)
   })
 })
+
+
 
 btnSubmitComment?.addEventListener('click', async () => {
   // selectorRating.value
@@ -49,5 +57,7 @@ btnSubmitComment?.addEventListener('click', async () => {
 
   const {newComment} = await response.json();
   console.log(newComment)
-
+  comentList.innerHTML = renderNewComment(newComment) + comentList.innerHTML;
+  commentMessage.value = '';
+  selectorRating.value = 5
 })
