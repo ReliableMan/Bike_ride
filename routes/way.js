@@ -8,12 +8,14 @@ const {ratingController} = require('../controllers/ratingController')
 router.get('/', async (req, res) => {
   let ways;
   let ways1;
-  let user
+  let userlogIn
+  let username 
   try {
-    console.log(res.locals?.username)
-    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
+    // console.log(res.locals?.username)
+    userlogIn = await User.findOne({where: {name: res.locals?.username}, raw: true})
     ways1 = await Way.findAll({order:[['id', 'DESC']], raw: true});
     ways = await ratingController(ways1);
+
     // ways.forEach( async (el) => {
     //   const arrComments = await Comment.findAll({where: {way_id: el.id}, raw:true})
     //   el.rating = Number((arrComments.reduce((acc, comm) => acc += comm.rating, 0) / arrComments.length).toFixed(2)) || 'рейтинг отсутствует';
@@ -25,8 +27,8 @@ router.get('/', async (req, res) => {
       error: {}
     });
   }
-  console.log(user)
-  return res.render('index', { ways, user });
+  console.log(userlogIn)
+  return res.render('index', { ways, userlogIn });
 });
 // ////////////////////////////////////////////////////////////
 // С ФЕТЧА
@@ -107,7 +109,7 @@ router.get('/:id', async (req, res) => {
   // let rating;
   // console.log(req.params.id)
   try {
-    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
+    userlogIn = await User.findOne({where: {name: res.locals?.username}, raw: true})
     way = await Way.findOne({where:{id:req.params.id}, include: [{model: User, attribute: ['name']}], raw: true});
     comment = await Comment.findAll({where:{way_id: way.id}, include: [{model: User, attribute: ['name']}], raw: true});
     way.rating = (comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2);
@@ -121,10 +123,10 @@ router.get('/:id', async (req, res) => {
     });
   }
   comment.forEach(el => el.nameUser = el['User.name'])
-  if (user.id === way.user_id || user.role === 'admin') user.isGrantDel = true
+  if (userlogIn.id === way.user_id || userlogIn.role === 'admin') userlogIn.isGrantDel = true
 
   // console.log(comment)
-  return res.render('infoRoad', { way, comment, user });
+  return res.render('infoRoad', { way, comment, userlogIn });
 });
 // ////////////////////////////////////////////////////////////
 // router.put('/:id', async (req, res) => {

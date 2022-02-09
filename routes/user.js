@@ -55,7 +55,8 @@ router.get('/edit/:id', async (req, res) => {
   user.city = user['UserInfo.city']
   user.bike = user['UserInfo.bike']
 
-  res.render('editProfile', {user})
+  userlogIn = {id: user.id}
+  res.render('editProfile', {user, userlogIn})
 })
 // ////////////////////////////////////////////////////////////
 router.put('/edit/:id', async (req, res) => {
@@ -80,9 +81,10 @@ router.put('/edit/:id', async (req, res) => {
 // ////////////////////////////////////////////////////////////
 router.get('/:id', async (req, res) => {
   let user
-  let userInfo;
+  // let user2
+  // let userInfo;
   try {
-  console.log(req.params?.id)
+  // console.log(req.params?.id)
     user = await User.findOne({
       where: {id: req.params?.id},
       include: [{
@@ -91,13 +93,12 @@ router.get('/:id', async (req, res) => {
       }],
        raw: true
       })
-
-      
-      userQuestions = await User.findOne({
+        // вставить инклюд и роль
+      userlogIn = await User.findOne({
         where: {name: res.locals?.username},
         raw: true
         })
-        console.log('---------------------', userQuestions)
+        // console.log('---------------------', userlogIn)
   } catch (error) {
     
   }
@@ -106,11 +107,15 @@ router.get('/:id', async (req, res) => {
   user.about_me = user['UserInfo.about_me']
   user.city = user['UserInfo.city']
   user.bike = user['UserInfo.bike']
-  if (userQuestions.role === 'admin' || userQuestions.id == user.id) user.userHome = true
+  if (userlogIn.role === 'admin' || userlogIn.id == user.id) user.userHome = true
   console.log(user)
-  res.render('userProfile', {user})
+  res.render('userProfile', {user , userlogIn})
 })
+// /////////////////////////////////////////////////////////////////
 
+router.get('/', async (req, res) => {
+  res.redirect('/')
+})
 
 module.exports = router;
 
