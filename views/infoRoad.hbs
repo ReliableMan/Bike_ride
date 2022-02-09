@@ -8,7 +8,7 @@
         <h3 id="rating">Рейтинг: {{way.rating}}</h3>
         <h3>Населенный пункт: </h3>
         <p>Длина маршрута: </p>
-        <p>Автор: {{way.user_id}} (Пока что это id Пользователя)</p>
+        <p>Автор: <a href="/user/{{way.user_id}}">User:(Пока что это id Пользователя)</a></p>
         <p style="max-width: 500px;">Тут надо вставить ссылку подробнее {{way.body}}</p>
         <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
                               <option value="5">5</option>

@@ -82,9 +82,9 @@ router.get('/:id', async (req, res) => {
   let user
   let userInfo;
   try {
-
+  console.log(req.params?.id)
     user = await User.findOne({
-      where: {name: res.locals?.username},
+      where: {id: req.params?.id},
       include: [{
         model: UserInfo,
         attributes: ['bike', 'city', 'about_me', 'age']
@@ -92,6 +92,12 @@ router.get('/:id', async (req, res) => {
        raw: true
       })
 
+      
+      userQuestions = await User.findOne({
+        where: {name: res.locals?.username},
+        raw: true
+        })
+        console.log('---------------------', userQuestions)
   } catch (error) {
     
   }
@@ -100,7 +106,8 @@ router.get('/:id', async (req, res) => {
   user.about_me = user['UserInfo.about_me']
   user.city = user['UserInfo.city']
   user.bike = user['UserInfo.bike']
-  if (user['UserInfo.role'] === 'admin' || user.id) user.userHome = true
+  if (userQuestions.role === 'admin' || userQuestions.id == user.id) user.userHome = true
+  console.log(user)
   res.render('userProfile', {user})
 })
 
