@@ -18,6 +18,7 @@ console.log(infoBtn)
 
       routesList.innerHTML = ''
       ways.forEach(way => {
+        console.log(way)
         routesList.innerHTML += renderWayList(way)
       });
       infoBtn = [...document.getElementsByClassName('btnInfo')];
@@ -42,6 +43,7 @@ btnSubmitComment?.addEventListener('click', async () => {
   // selectorRating.value
   console.log(selectorRating.value)
   console.log(commentMessage.value)
+  const rating = document.getElementById('rating')
 
   const response = await fetch('/ways/comment', {
     method: "POST",
@@ -54,10 +56,10 @@ btnSubmitComment?.addEventListener('click', async () => {
       way_id: infoWayOne[0].id
     })
   });
-
-  const {newComment} = await response.json();
+  const {newComment, newRating} = await response.json();
+  rating.textContent = newRating
   console.log(newComment)
   comentList.innerHTML = renderNewComment(newComment) + comentList.innerHTML;
   commentMessage.value = '';
-  selectorRating.value = 5
+  selectorRating.value = 5;
 })

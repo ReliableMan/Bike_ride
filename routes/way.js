@@ -7,7 +7,12 @@ router.get('/', async (req, res) => {
   try {
     console.log(res.locals?.username)
     user = await User.findOne({where: {name: res.locals?.username}, raw: true})
-    ways = await Way.findAll({order:[['id', 'DESC']]});
+    ways = await Way.findAll({order:[['id', 'DESC']], raw: true});
+    ways.forEach( async (el) => {
+      const arrComments = await Comment.findAll({where: {way_id: el.id}, raw:true})
+      el.rating = Number((arrComments.reduce((acc, comm) => acc += comm.rating, 0) / arrComments.length).toFixed(2)) || 'рейтинг отсутствует';
+      // console.log(el)
+    })
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить записи из базы данных.',
@@ -21,29 +26,34 @@ router.get('/', async (req, res) => {
 
 router.get('/sort/:id', async (req, res) => {
   let ways;
+  let ways1;
   let user
-  console.log(req.params.id)
   try {
-    console.log(res.locals?.username)
-    user = await User.findOne({where: {name: res.locals?.username}, raw: true})
-
-    if(req.params.id == 1) ways = await Way.findAll({order:[['id', 'ASC']], raw:true});
-    if(req.params.id == 2) ways = await Way.findAll({order:[['createdAt', 'DESC']], raw:true});
-    if(req.params.id == 3) ways = await Way.findAll({order:[['createdAt', 'ASC']], raw:true});
-    else ways = await Way.findAll({order:[['id', 'DESC']], raw:true});
+    user = await User.findOne({where: {name: res.locals?.username}, raw: true}) 
+    // Настроить параметры сортировки в соответствии с селектом
+    if(req.params.id == 1) ways1 = await Way.findAll({order:[['id', 'ASC']], raw:true});
+    if(req.params.id == 2) ways1 = await Way.findAll({order:[['createdAt', 'DESC']], raw:true});
+    if(req.params.id == 3) ways1 = await Way.findAll({order:[['createdAt', 'ASC']], raw:true});
+    else ways1 = await Way.findAll({order:[['id', 'DESC']], raw:true});
+    ways = await Promise.all(ways1.map( async (el) => {
+      const arrComments = await Comment.findAll({where: {way_id: el.id}, raw:true})
+      el.rating = Number((arrComments.reduce((acc, comm) => acc += comm.rating, 0) / arrComments.length).toFixed(2)) || 'рейтинг отсутствует';
+      return el
+    }));
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить записи из базы данных.',
       error: {}
     });
   }
-  console.log(ways)
+  
   return res.json({ ways });
 });
 
 router.post('/comment', async (req, res) => {
   let newComment;
   let user;
+  let newRating;
   // console.log('fsdgdfgfhfjhfdjh0')
   try {
     user = await User.findOne({where: {name: res.locals?.username}, raw: true})
@@ -51,11 +61,13 @@ router.post('/comment', async (req, res) => {
     newComment = await Comment.create({ text: req.body.text, rating: req.body.rating, user_id: user.id, way_id: req.body.way_id});
     // console.log('fsdgdfgfhfjhfdjh2')
     // console.log(newComment)
+    const comment = await Comment.findAll({where: {way_id: req.body.way_id}, raw: true})
+    newRating = Number((comment.reduce((acc, el) => acc+= el.rating, 0) / comment.length).toFixed(2)) || 'рейтинг отсутствует';
   } catch (error) {
     return res.json({ isUpdateSuccessful: false, errorMessage: 'Не удалось обновить запись в базе данных.' });
   }
   
-  return res.json({ newComment });
+  return res.json({ newComment, newRating });
 });
 
 
