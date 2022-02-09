@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Way, User, Comment} = require('../db/models/');
+const {Way, User, Comment, UserInfo} = require('../db/models/');
 const {sortWays, sortRating} = require('../middleWares/sortWays')
 const {ratingController} = require('../controllers/ratingController')
 
@@ -108,17 +108,22 @@ router.get('/:id', async (req, res) => {
   // console.log(req.params.id)
   try {
     user = await User.findOne({where: {name: res.locals?.username}, raw: true})
-    way = await Way.findOne({where:{id:req.params.id}, raw: true});
-    comment = await Comment.findAll({where:{way_id: way.id}, raw: true});
+    way = await Way.findOne({where:{id:req.params.id}, include: [{model: User, attribute: ['name']}], raw: true});
+    comment = await Comment.findAll({where:{way_id: way.id}, include: [{model: User, attribute: ['name']}], raw: true});
     way.rating = (comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2);
     // console.log(comment.length)
+    way.nameUser = way['User.name']
+    // comment.nameUser = comment['User.name']
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить запись из базы данных.',
       error: {}
     });
   }
+  comment.forEach(el => el.nameUser = el['User.name'])
+  if (user.id === way.user_id || user.role === 'admin') user.isGrantDel = true
 
+  // console.log(comment)
   return res.render('infoRoad', { way, comment, user });
 });
 // ////////////////////////////////////////////////////////////
@@ -134,14 +139,34 @@ router.get('/:id', async (req, res) => {
 //   return res.json({ isUpdateSuccessful: true, wayID: way[1].id });
 // });
 // ////////////////////////////////////////////////////////////
-// router.delete('/:id', async (req, res) => {
-//   try {
-//     await Way.destroy({where:{id:req.params.id}});
-//   } catch (error) {
-//     return res.json({ isDeleteSuccessful: false, errorMessage: 'Не удалось удалить запись из базы данных.' });
-//   }
-//   return res.json({ isDeleteSuccessful: true });
-// });
+router.get('/delete/:id', async (req, res) => {
+  let user;
+  let way;
+  // console.log('---------------------------------------2')
+  try {
+    user = await User.findOne({
+      where: {name: res.locals?.username},
+      include: [{
+        model: UserInfo,
+        attributes: ['bike'], // добавить role
+      }],
+      raw: true
+    })
+    way = await Way.findOne({where: {id: req.params.id}, raw: true});
+    // console.log('---------------------------------------3')
+    // console.log(user.id === way.user_id)
+    if (user.id === way.user_id /*|| user['UserInfo.role'] === 'admin'*/) {
+     await Way.destroy({where:{id : req.params.id}});
+    //  console.log('---------------------------------------------------delete')
+    } else {
+      return res.json('Нет прав для удаления записи из базы данных.' );
+    }
+    
+  } catch (error) {
+    return res.json({ isDeleteSuccessful: false, errorMessage: 'Не удалось удалить запись из базы данных.' });
+  }
+  return res.redirect('/ways');
+});
 // ////////////////////////////////////////////////////////////
 // router.get('/:id/edit', async (req, res) => {
 //   const way = await Way.findOne({where:{id:req.params.id}});

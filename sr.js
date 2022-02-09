@@ -1,19 +1,8 @@
-require('dotenv').config();
-const {Way, User, UserInfo} = require('./db/models/');
+// require('dotenv').config();
+// const {Way, User} = require('./db/models/');
 
-async function qwer() {
-  const way = UserInfo.create({bike: 'BNW', 
-                              city: 'Moskva', 
-                              about_me: `Зачастую нам надо повторять одно и то же действие во многих частях программы.
-
-                              Например, необходимо красиво вывести сообщение при приветствии посетителя, при выходе посетителя с сайта, ещё где-нибудь.
-                              
-                              Чтобы не повторять один и тот же код во многих местах, придуманы функции. Функции являются основными «строительными блоками» программы.
-                              
-                              Примеры встроенных функций вы уже видели – это alert(message), prompt(message, default) и confirm(question). Но можно создавать и свои.`, 
-                              user_id: 1,
-                            age: 4564326,
-                            })
-}
+// async function qwer() {
+//   const way = UserInfo.create({bike: 'Magis Kohlrabi Welsh Onion', city: 'itter', user_id: 2})
+// }
 
 // qwer()
