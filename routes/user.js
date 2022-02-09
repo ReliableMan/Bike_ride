@@ -8,7 +8,7 @@ const {
   renderSignInForm,
   renderSignUpForm,
   renderProfile
-} = require("../controllers/userControllers");
+} = require('../controllers/userControllers');
 
 const router = express.Router();
 
