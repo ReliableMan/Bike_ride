@@ -1,18 +1,24 @@
 const router = require('express').Router();
 const {Way, User, Comment} = require('../db/models/');
+const {sortWays, sortRating} = require('../middleWares/sortWays')
+const {ratingController} = require('../controllers/ratingController')
+
+
 
 router.get('/', async (req, res) => {
   let ways;
+  let ways1;
   let user
   try {
     console.log(res.locals?.username)
     user = await User.findOne({where: {name: res.locals?.username}, raw: true})
-    ways = await Way.findAll({order:[['id', 'DESC']], raw: true});
-    ways.forEach( async (el) => {
-      const arrComments = await Comment.findAll({where: {way_id: el.id}, raw:true})
-      el.rating = Number((arrComments.reduce((acc, comm) => acc += comm.rating, 0) / arrComments.length).toFixed(2)) || 'рейтинг отсутствует';
-      // console.log(el)
-    })
+    ways1 = await Way.findAll({order:[['id', 'DESC']], raw: true});
+    ways = await ratingController(ways1);
+    // ways.forEach( async (el) => {
+    //   const arrComments = await Comment.findAll({where: {way_id: el.id}, raw:true})
+    //   el.rating = Number((arrComments.reduce((acc, comm) => acc += comm.rating, 0) / arrComments.length).toFixed(2)) || 'рейтинг отсутствует';
+    //   // console.log(el)
+    // })
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить записи из базы данных.',
@@ -23,7 +29,7 @@ router.get('/', async (req, res) => {
   return res.render('index', { ways, user });
 });
 
-
+// С ФЕТЧА
 router.get('/sort/:id', async (req, res) => {
   let ways;
   let ways1;
@@ -31,15 +37,19 @@ router.get('/sort/:id', async (req, res) => {
   try {
     user = await User.findOne({where: {name: res.locals?.username}, raw: true}) 
     // Настроить параметры сортировки в соответствии с селектом
-    if(req.params.id == 1) ways1 = await Way.findAll({order:[['id', 'ASC']], raw:true});
-    if(req.params.id == 2) ways1 = await Way.findAll({order:[['createdAt', 'DESC']], raw:true});
-    if(req.params.id == 3) ways1 = await Way.findAll({order:[['createdAt', 'ASC']], raw:true});
-    else ways1 = await Way.findAll({order:[['id', 'DESC']], raw:true});
-    ways = await Promise.all(ways1.map( async (el) => {
-      const arrComments = await Comment.findAll({where: {way_id: el.id}, raw:true})
-      el.rating = Number((arrComments.reduce((acc, comm) => acc += comm.rating, 0) / arrComments.length).toFixed(2)) || 'рейтинг отсутствует';
-      return el
-    }));
+    
+    ways1 = await sortWays(req.params.id)
+    // if(req.params.id == 1) ways1 = await Way.findAll({order:[['id', 'ASC']], raw:true});
+    // if(req.params.id == 2) ways1 = await Way.findAll({order:[['createdAt', 'DESC']], raw:true});
+    // if(req.params.id == 3) ways1 = await Way.findAll({order:[['createdAt', 'ASC']], raw:true});
+    // else ways1 = await Way.findAll({order:[['id', 'DESC']], raw:true});
+    ways = await ratingController(ways1);
+    // ways = await Promise.all(ways1.map( async (el) => {
+    //   const arrComments = await Comment.findAll({where: {way_id: el.id}, raw:true})
+    //   el.rating = Number((arrComments.reduce((acc, comm) => acc += comm.rating, 0) / arrComments.length).toFixed(2)) || 'рейтинг отсутствует';
+    //   return el
+    // }));
+    if(req.params.id == 1) ways = sortRating(ways)
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить записи из базы данных.',

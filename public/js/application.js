@@ -24,6 +24,7 @@ console.log(infoBtn)
       infoBtn = [...document.getElementsByClassName('btnInfo')];
       infoBtn?.forEach((el,index) => {
         el.addEventListener('click', () => {
+          console.log(5434534534654)
           window.location = `http://localhost:3000/ways/${el.id}`
         })
       })
