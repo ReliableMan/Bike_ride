@@ -1,5 +1,5 @@
+/* eslint-disable max-len */
 ymaps.ready(init);
-
 function init() {
   const { geolocation } = ymaps;
   const myMap = new ymaps.Map('map', {
@@ -30,6 +30,8 @@ function init() {
     // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
     result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
     myMap.geoObjects.add(result.geoObjects);
+    // const loc = myMap.geoObjects.add(result.geoObjects);
+    // console.log(loc);
   });
   const multiRoute = new ymaps.multiRouter.MultiRoute({
     referencePoints: [
@@ -47,12 +49,6 @@ function init() {
     type: 'bicycle', // пешком
   });
   control.routePanel.options.set({
-    // Типы маршрутизации, которые будут доступны
-    // для выбора пользователям.
-    // В примере можно построить
-    // автомобильный маршрут с вызовом такси и пешеходный маршрут.
-    // При использовании CSP, убедитесь что у вас подключена последняя версия правил.
-    // В противном случае, маршрутизация с типом "taxi" не будет работать.
     types: {
       pedestrian: true,
       bicycle: true,
@@ -61,23 +57,3 @@ function init() {
   });
 }
 
-
-
-
-
-const arr = []
-const time = setInterval(() => {
-  const input = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-  if (input.length && input[0].value !== `<empty string>` 
-  && input[0].value !=='' ) {
-    let x, y;
-    x = input[0].value.split(',').map(el=> parseFloat(el))
-    if (!isNaN(x[0])) arr.push(x)
-      if (input.length && input[1].value !== `<empty string>` && input[1].value !=='') {
-        y = input[1].value.split(',').map(el=> parseFloat(el))
-        if (y[0]) arr.push(y)
-        clearInterval(time);
-        console.log(arr);
-      }
-  }
-}, 100);
