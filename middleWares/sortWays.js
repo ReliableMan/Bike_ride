@@ -18,6 +18,7 @@ exports.sortWays = async (id) => {
 
 exports.sortRating = (ways) => {
   // const sortWays = async (id) => {
+    console.log('sort')
     return ways.sort((a, b) => b.rating - a.rating)
   };
 

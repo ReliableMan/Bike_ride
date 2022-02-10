@@ -64,16 +64,20 @@ function init() {
 
 
 
-const obj = {}
-// const arr = document.getElementsByClassName()
-// VM1010:1 Uncaught TypeError: Failed to execute 'getElementsByClassName' on 'Document': 1 argument required, but only 0 present.
-//     at <anonymous>:1:22
-// (anonymous) @ VM1010:1
-const arr = document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')
-// undefined
-// var arr3 = Array.prototype.slice.call( obj.arr )
-// var arr2 = Array.from(obj.arr);
 
-// VM1084:1 (2) [input.ymaps-2-1-79-route-panel-input__input, input.ymaps-2-1-79-route-panel-input__input]
-// undefined
-console.log(arr[1])
+const arr = []
+const time = setInterval(() => {
+  const input = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
+  if (input.length && input[0].value !== `<empty string>` 
+  && input[0].value !=='' ) {
+    let x, y;
+    x = input[0].value.split(',').map(el=> parseFloat(el))
+    if (!isNaN(x[0])) arr.push(x)
+      if (input.length && input[1].value !== `<empty string>` && input[1].value !=='') {
+        y = input[1].value.split(',').map(el=> parseFloat(el))
+        if (y[0]) arr.push(y)
+        clearInterval(time);
+        console.log(arr);
+      }
+  }
+}, 100);

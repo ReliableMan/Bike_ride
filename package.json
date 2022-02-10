@@ -21,6 +21,7 @@
   "homepage": "https://github.com/AndreyOhotnikov/bike_ride#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cloudinary-core": "^2.12.3",
     "connect-redis": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
