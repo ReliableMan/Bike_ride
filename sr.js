@@ -1,6 +1,6 @@
-// require('dotenv').config();
+require('dotenv').config();
 
-// const { Way, User, UserInfo } = require('./db/models/');
+const { Way, User, UserInfo } = require('./db/models/');
 
 // // async function qwer() {
 // //   const way = UserInfo.create({
@@ -18,11 +18,31 @@
 // //   })
 // // }
 
+const body = {
+  wayTitle: 'еуые',
+  wayCity: 'мск',
+  wayImage: 'https://yulsun.ru/misc/img/ny/cap.png',
+  wayText: '234234234234234234234234',
+  xy1: [ 54.89542721, 38.014534 ],
+  xy2: [ 54.87246716, 38.02758027 ],
+  distance: '7,5 км'
+}
 
-// async function qwer() {
-//   const way = Way.create({ title: 'Magis Kohlrabi Welsh Onion', body: 'Celery quandong swiss chard chicory earthnut pea potato. Salsify taro catsear garlic gram celery bitterleaf wattle seed collard greens nori. Grape wattle seed kombu beetroot horseradish carrot squash brussels sprout chard.', user_id: 1 })
-// }
 
-// //qwer()
+
+async function qwer() {
+  const way = await Way.create({ 
+    title: body.wayTitle, 
+    body: body.wayText, 
+      user_id: 1,
+      distance: body.distance,
+      xy_start: body.xy1.join('_'),
+      xy_end: body.xy2.join('_'),
+      url_img: body.wayImage,
+      }, { returning: true, plain: true, raw:true })
+  console.log(way)
+}
+
+qwer()
 // //qwer()
 

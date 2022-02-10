@@ -7,10 +7,10 @@
       <div class="inform">
         <h2>Название маршрута: {{way.title}} </h2>
         <h3 id="rating">Рейтинг: {{way.rating}}</h3>
-        <h3>Населенный пункт: </h3>
-        <p>Длина маршрута: </p>
+        <h3>Населенный пункт: {{way.city}} </h3>
+        <p>Длина маршрута:  {{way.distance}}</p>
         <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
-        <p style="max-width: 500px;">Тут надо вставить ссылку подробнее {{way.body}}</p>
+        <p style="max-width: 500px;">{{way.body}}</p>
         <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
                               <option value="5">5</option>
                               <option value="4">4</option>

@@ -25,10 +25,7 @@ const time = setInterval(() => {
       }
   }
 }, 100);
-{/* <ymaps class="ymaps-2-1-79-transport-pin__text" style=""><ymaps id="id_164449899145082637313" class="" style=""><ymaps>5,9&nbsp;км</ymaps></ymaps></ymaps> */}
-// btnNewWay[0]?.addEventListener('click', () => {
-//   createEntryesWay()
-// })
+
 
 
 async function createEntryesWay(arrCoord = []) {
@@ -42,14 +39,16 @@ async function createEntryesWay(arrCoord = []) {
     xy2: arrCoord.pop(),
     distance: distance[0]?.textContent || 'Расстояние неопределено'
   }
-  const response = await fetch('/ways/new', {
+  console.log(dataNewWay)
+  const response = await fetch('/ways/new/add', {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(dataNewWay)
   });
-  const {newComment, newRating} = await response.json();
-  // здесь делаем фетч
-  // console.log(obj)
+  const {newWay} = await response.json();
+  console.log(newWay)
+  window.location = `http://localhost:3000/ways/${newWay.id}`
+
 }

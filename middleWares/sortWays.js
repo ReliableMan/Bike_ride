@@ -10,9 +10,9 @@ exports.sortWays = async (id) => {
     case 2: // по дате
       return ways1 = await Way.findAll({order:[['createdAt', 'DESC']], raw:true});
     case 3: // по длинне
-      return ways1 = await Way.findAll({order:[['createdAt', 'ASC']], raw:true});
+      return ways1 = await Way.findAll({order:[['distance', 'ASC']], raw:true});
     default: 
-      return ways1 = await Way.findAll({order:[['id', 'DESC']], raw:true});
+      return ways1 = await Way.findAll({order:[['id', 'ASC']], raw:true});
   }
 };
 
