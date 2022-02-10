@@ -1,3 +1,6 @@
+<div class="popular">
+  <h5>Популярные маршруты</h5>
+</div>
 <div class="sort">
   <select id="selector" name="differentSort" class="differentSort">
     <option value="1">По рейтингу</option>
@@ -7,39 +10,39 @@
 </div>
 <div class="routes">
   <div class="rout">
-    <img src="https://chekogo.com/wp-content/uploads/2016/12/Castle-Valley.jpg" class="img" width="200px"
-      height="200px">
+    <img src="https://kianews24.ru/wp-content/uploads/2021/09/Screenshot-2021-09-15-at-14-30-47-Google-Karti.png"
+      class="img" width="200px" height="200px">
     <h3>Маршрут1</h3>
-    <button class="btn btnInfo" id="1">Перейти</button>
+    <button class="btn btnInfo" id="1">Посмотреть</button>
     <p>Рейтинг: </p>
   </div>
   <div class="rout">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOTVEDH1zvBmZoeMBO7944rv3KoukZ5PIWDA&usqp=CAU"
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHuEKYw2SsA5TGrz2xXDFkdzO-HDKKsBtLSQ&usqp=CAU"
       class="img" width="200px" height="200px">
     <h3>Маршрут2</h3>
-    <button class="btn btnInfo" id="2">Перейти</button>
+    <button class="btn btnInfo" id="2">Посмотреть</button>
     <p>Рейтинг: </p>
   </div>
   <div class="rout">
-    <img src="https://livingasia.online/wp-content/uploads/2020/08/pastbishe-97-scaled.jpg" class="img" width="200px"
-      height="200px">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw6_6yOPnmwbvMYZX0W5arLd4Z02SC8CnbyA&usqp=CAU"
+      class="img" width="200px" height="200px">
     <h3>Маршрут3</h3>
-    <button class="btn btnInfo" id="3">Перейти</button>
+    <button class="btn btnInfo" id="3">Посмотреть</button>
     <p>Рейтинг: </p>
   </div>
   <div class="rout">
-    <img src="https://geographyofrussia.com/wp-content/uploads/2009/05/6122.jpg" class="img" width="200px"
-      height="200px">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx2l-QSRQce5HxsrzYGonA9dzXyJsUbnJT0A&usqp=CAU"
+      class="img" width="200px" height="200px">
     <h3>Маршрут4</h3>
-    <button class="btn btnInfo" id="4">Перейти</button>
+    <button class="btn btnInfo" id="4">Посмотреть</button>
     <p>Рейтинг: </p>
   </div>
-   {{#each ways}}
+  {{#each ways}}
   <div class="rout" id="{{this.id}}">
-    <img src="https://geographyofrussia.com/wp-content/uploads/2009/05/6122.jpg" alt="sfgdsfghfd" class="img" width="200px"
-      height="200px">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6cTAMR85cp3MDu8y688KYmwniI1lfHIZ1Aw&usqp=CAU"
+      alt="sfgdsfghfd" class="img" width="200px" height="200px">
     <h3>{{this.title}}</h3>
-    <button class="btn btnInfo" id="{{this.id}}">Перейти</button>
+    <button class="btn btnInfo" id="{{this.id}}">Посмотреть</button>
     <p>Рейтинг: {{this.rating}}</p>
   </div>
   {{/each}}

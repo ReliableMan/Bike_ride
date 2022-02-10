@@ -1,3 +1,4 @@
+
 /* eslint-disable max-len */
 ymaps.ready(init);
 function init() {
@@ -39,10 +40,12 @@ function init() {
       'Москва, метро Павелецкая',
     ],
   });
+
   // Включение режима редактирования.
-  multiRoute.editor.start();
+  // multiRoute.editor.start();
   // А вот так можно отключить режим редактирования.
   // Добавление маршрута на карту.
+
   myMap.geoObjects.add(multiRoute);
   const control = myMap.controls.get('routePanelControl');
   control.routePanel.state.set({
@@ -57,4 +60,8 @@ function init() {
   });
 }
 
+
+// // VM1084:1 (2) [input.ymaps-2-1-79-route-panel-input__input, input.ymaps-2-1-79-route-panel-input__input]
+// // undefined
+// console.log(arr[1])
 
