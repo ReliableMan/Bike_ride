@@ -1,5 +1,6 @@
-ymaps.ready(init);
 
+/* eslint-disable max-len */
+ymaps.ready(init);
 function init() {
   const { geolocation } = ymaps;
   const myMap = new ymaps.Map('map', {
@@ -30,6 +31,8 @@ function init() {
     // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
     result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
     myMap.geoObjects.add(result.geoObjects);
+    // const loc = myMap.geoObjects.add(result.geoObjects);
+    // console.log(loc);
   });
   const multiRoute = new ymaps.multiRouter.MultiRoute({
     referencePoints: [
@@ -37,22 +40,18 @@ function init() {
       'Москва, метро Павелецкая',
     ],
   });
+
   // Включение режима редактирования.
-  multiRoute.editor.start();
+  // multiRoute.editor.start();
   // А вот так можно отключить режим редактирования.
   // Добавление маршрута на карту.
+
   myMap.geoObjects.add(multiRoute);
   const control = myMap.controls.get('routePanelControl');
   control.routePanel.state.set({
     type: 'bicycle', // пешком
   });
   control.routePanel.options.set({
-    // Типы маршрутизации, которые будут доступны
-    // для выбора пользователям.
-    // В примере можно построить
-    // автомобильный маршрут с вызовом такси и пешеходный маршрут.
-    // При использовании CSP, убедитесь что у вас подключена последняя версия правил.
-    // В противном случае, маршрутизация с типом "taxi" не будет работать.
     types: {
       pedestrian: true,
       bicycle: true,
