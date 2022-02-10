@@ -17,13 +17,25 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Comment, { 
         foreignKey: 'user_id',
         onDelete: 'CASCADE'
+      }),
+      User.hasOne(models.UserInfo, { 
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE'
       })
     }
   }
   User.init({
-    name: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: { type: DataTypes.STRING },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      is: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+    },
   }, {
     sequelize,
     modelName: 'User',

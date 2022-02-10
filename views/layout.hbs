@@ -10,11 +10,13 @@
   <title>Велопрогулка</title>
   <script defer src='/js/application.js'></script>
   <script defer src='/js/renderHTML.js'></script>
-  <script src="https://api-maps.yandex.ru/2.1?apikey=54010e8c-e173-4ee1-aaa2-7318afc35f1f&lang=ru_RU"
+  <script defer src="https://api-maps.yandex.ru/2.1?apikey=54010e8c-e173-4ee1-aaa2-7318afc35f1f&lang=ru_RU"
     type="text/javascript"></script>
+
   <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
   <script src="/js/map.js" type="text/javascript"></script>
   
+
 
   {{#if isSignin}}
   <script defer src='/js/signin.js'></script>
@@ -30,9 +32,10 @@
       <nav class="clearfix mar-b-1">
         <ul class="no-bullets no-margin no-padding right">
           {{#if username}}
-          <li class="pipe-separate t-light-green left"><a href="/user/{{user.id}}">Hi,{{username}}</a></li>
+          <li class="pipe-separate t-light-green left"><a href="/user/{{userlogIn.id}}">Hi,{{username}}</a></li>
           <li class="pipe-separate t-light-green left"><a href="/user/signout">logOut</a></li>
           <li class="pipe-separate t-light-green left"><a href="/">home</a></li>
+          <li class="pipe-separate t-light-green left"><a href="/ways/new">Новый маршрут</a></li>
           {{else }}
           <li class="pipe-separate t-light-green left"><a href='/user/signup'>Registration</a></li>
           <li class="pipe-separate t-light-green left"><a href='/user/signin'>LogIn</a></li>
@@ -45,6 +48,10 @@
   </header>
   {{{body}}}
 
+{{!-- <script   src="https://api-maps.yandex.ru/2.1?apikey=54010e8c-e173-4ee1-aaa2-7318afc35f1f&lang=ru_RU"
+    type="text/javascript"></script>
+  <script  src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+  <script  src="/js/map.js" type="text/javascript"></script> --}}
 </body>
 
 </html>
