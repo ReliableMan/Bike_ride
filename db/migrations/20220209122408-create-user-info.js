@@ -1,18 +1,18 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable('UserInfos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      text: {
-        type: Sequelize.TEXT
+      bike: {
+        type: Sequelize.STRING
       },
-      rating: {
-        type: Sequelize.INTEGER
+      about_me: {
+        type: Sequelize.TEXT
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -23,17 +23,15 @@ module.exports = {
           as: 'user_id',
         }
       },
-      
-      way_id: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Ways',
-          key: 'id',
-          as: 'way_id',
-        }
+      age: {
+        type: Sequelize.INTEGER
       },
-      
+      role: {
+        type: Sequelize.STRING
+      },
+      city: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -45,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Comments');
+    await queryInterface.dropTable('UserInfos');
   }
 };

@@ -6,7 +6,7 @@ body {
   font-family: "Fira Sans", Helvetica, Arial, sans-serif;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size:cover
 }
 .form-structor {
   display: flex;
