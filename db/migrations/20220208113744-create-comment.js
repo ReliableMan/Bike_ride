@@ -14,7 +14,6 @@ module.exports = {
       rating: {
         type: Sequelize.INTEGER
       },
-      
       user_id: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',

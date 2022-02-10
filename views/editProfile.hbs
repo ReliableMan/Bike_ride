@@ -10,7 +10,7 @@
         <input bike id="username" class="form-control" name="name" type="text" required placeholder="марка байка" value="{{user.bike}}">
       </div>
       <div class="old">
-        <input ageIn id="username" class="form-control" name="name" type="text" required placeholder="Возраст" value="{{user.age}}">
+        <input ageIn id="username" class="form-control" name="name" type="number" required placeholder="Возраст" value="{{user.age}}">
       </div>
       <div class="city">
         <input  id="username" class="form-control" name="name" type="text" required placeholder="Ваш город" value="{{user.city}}">
@@ -22,6 +22,14 @@
   </div>
   <div class="aboutMe">
     <button id="{{user.id}}" class="btn btnEnterEditProfile">Редактировать</button>
+    {{#if isAdmin}}
+      <div id="adm">
+      {{#if user.userRole}}
+      <button id="{{user.id}}" class="btn btnToAddAdmin">Установить права администратора</button>
+      {{else }}
+      <button id="{{user.id}}" class="btn btnToDelAdmin">Удалить права администратора</button>
+      {{/if}}</div>
+    {{/if}}
   </div>
   </div>
 {{/if}}

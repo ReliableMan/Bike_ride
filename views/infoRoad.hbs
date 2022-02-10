@@ -21,7 +21,7 @@
 
 
     <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
-{{#if user.isGrantDel}}
+  {{#if userlogIn.isGrantDelWay}}
     {{!-- <button id="btnComment btnDeleteWay" type="submit" name="submit_btn"><a href="/ways/delete/{{way.id}}">Удалить маршрут <button></button></a> </button> --}}
      <a href="/ways/delete/{{way.id}}">Удалить маршрут </a>
 
@@ -35,10 +35,14 @@
     <div>Отзывы: </div>
 <ul id="comentList">
              {{#each comment}}
-            <li style="border: 1px solid black;">
+            <li class="commentList" style="border: 1px solid black;">
               <div id="comment"></div>
                   <h3><b><a href="/user/{{this.user_id}}">User:{{this.nameUser}}</a></b></h3> <span>Оценка: {{this.rating}}</span>
                   <p>Отзыв: {{this.text}}</p>
+                   {{#if this.isGrantDelComm}}
+                    <a class="delComment" href="/ways/comment/delete/{{this.id}}">Удалить комментарий </a>
+
+ {{/if}}
             </li>
           {{/each}}
           </ul>
