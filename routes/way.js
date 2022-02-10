@@ -128,21 +128,64 @@ router.post('/comment', async (req, res) => {
 
 // ////////////////////////////////////////////////////////////
 
-router.post('/', async (req, res) => {
+// router.post('/', async (req, res) => {
+//   try {
+//     const newWay = await Way.create({ title: req.body.title, body: req.body.body }, { returning: true, plain: true });
+//     return res.redirect(`/ways/${newWay.id}`);
+//   } catch (error) {
+//     res.render('error', {
+//       message: 'Не удалось добавить запись в базу данных.',
+//       error: {},
+//     });
+//   }
+//   return res.redirect(`/ways/${newWay.id}`);
+// });
+// ////////////////////////////////////////////////////////////
+router.get('/new', (req, res) => {
+  res.render('newRoad');
+});
+
+
+///////////////////////////////////////////////////////////////////
+/**
+ * подправить бд
+ * дописать ручку
+ * сделать редирект на фронте
+ */
+router.post('/new/add', async (req, res) => {
+  console.log(req.body)
+  console.log(res.locals?.username)
+  let newWay;
   try {
-    const newWay = await Way.create({ title: req.body.title, body: req.body.body }, { returning: true, plain: true });
-    return res.redirect(`/ways/${newWay.id}`);
+    user = await User.findOne({ where: { name: res.locals?.username }, raw: true });
+    // const way = await Way.create({ 
+    //   title: body.wayTitle, 
+    //   body: body.wayText, 
+    //     user_id: 1,
+    //     distance: body.distance,
+    //     xy_start: body.xy1.join('_'),
+    //     xy_end: body.xy2.join('_'),
+    //     url_img: body.wayImage,
+    //     }, { returning: true, plain: true, raw:true })
+    // console.log(way)
+    newWay = await Way.create({ title: req.body.wayTitle,  
+                                body: req.body.wayText, 
+                                city: req.body.wayCity,
+                                user_id: user.id,
+                                distance: req.body.distance,
+                                xy_start: req.body.xy1.join('_'),
+                                xy_end: req.body.xy2.join('_'),
+                                url_img: req.body.wayImage,
+                              }, { returning: true, plain: true })
+  console.log(newWay)
   } catch (error) {
     res.render('error', {
       message: 'Не удалось добавить запись в базу данных.',
       error: {},
     });
   }
-  return res.redirect(`/ways/${newWay.id}`);
-});
-// ////////////////////////////////////////////////////////////
-router.get('/new', (req, res) => {
-  res.render('newRoad');
+  res.json({newWay})
+  // res.render('newRoad');
 });
 // ////////////////////////////////////////////////////////////
 router.get('/:id', async (req, res) => {

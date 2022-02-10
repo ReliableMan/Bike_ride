@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Way.init({
     title: DataTypes.STRING,
+    city: DataTypes.STRING,
+    distance: DataTypes.STRING,
+    url_img: DataTypes.TEXT,
+    xy_start: DataTypes.STRING,
+    xy_end: DataTypes.STRING,
     body: DataTypes.TEXT,
     user_id: DataTypes.INTEGER
   }, {
