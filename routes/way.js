@@ -51,7 +51,9 @@ router.get('/sort/:id', async (req, res) => {
     //   el.rating = Number((arrComments.reduce((acc, comm) => acc += comm.rating, 0) / arrComments.length).toFixed(2)) || 'рейтинг отсутствует';
     //   return el
     // }));
-    if(req.params.id == 1) ways = sortRating(ways)
+    console.log('-------------------------------------------------54', req.params?.id == 1 )
+    if(req.params?.id == 1) ways = sortRating(ways)
+    console.log(ways)
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить записи из базы данных.',
@@ -95,7 +97,7 @@ router.post('/comment', async (req, res) => {
     // console.log('fsdgdfgfhfjhfdjh2')
     // console.log(newComment)
     const comment = await Comment.findAll({where: {way_id: req.body.way_id}, raw: true})
-    newRating = Number((comment.reduce((acc, el) => acc+= el.rating, 0) / comment.length).toFixed(2)) || 'рейтинг отсутствует';
+    newRating = Number((comment.reduce((acc, el) => acc+= el.rating, 0) / comment.length).toFixed(2)) || 0 //'рейтинг отсутствует';
     newComment.dataValues.username = user.name
     console.log(newComment)
   } catch (error) {
@@ -135,7 +137,7 @@ router.get('/:id', async (req, res) => {
     userlogIn = await User.findOne({where: {name: res.locals?.username}, include: [{model: UserInfo, attributes: ['role']}], raw: true})
     way = await Way.findOne({where:{id:req.params.id}, include: [{model: User, attribute: ['name']}], raw: true});
     comment = await Comment.findAll({where:{way_id: way.id}, order:[['createdAt', 'DESC']], include: [{model: User, attribute: ['name']}], raw: true});
-    way.rating = Number((comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2)) || 'рейтинг отсутствует';
+    way.rating = Number((comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2)) || 0 //'рейтинг отсутствует';
     console.log(way)
     way.nameUser = way['User.name']
     // comment.nameUser = comment['User.name']
