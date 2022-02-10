@@ -1,44 +1,45 @@
 {{#if way}}
 
 
- <div class="mainConteiner" id="{{way.id}}">
-      <div id="map" style="width: 600px; height: 400px"></div>
-      <div class="inform">
-        <h2>Название маршрута: {{way.title}} </h2>
-        <h3 id="rating">Рейтинг: {{way.rating}}</h3>
-        <h3>Населенный пункт: </h3>
-        <p>Длина маршрута: </p>
-        <p>Автор: {{way.user_id}} (Пока что это id Пользователя)</p>
-        <p style="max-width: 500px;">Тут надо вставить ссылку подробнее {{way.body}}</p>
-        <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
-                              <option value="5">5</option>
-                              <option value="4">4</option>
-                              <option value="3">3</option>
-                              <option value="2">2</option>
-                              <option value="1">1</option>
-                            </select></p>
-        <textarea name="message" ></textarea>
+<div class="mainConteiner" id="{{way.id}}">
+  <div id="map" style="width: 600px; height: 400px"></div>
+  <div id="app">
+    <div <div class="inform">
+      <h2>Название маршрута: {{way.title}} </h2>
+      <h3 id="rating">Рейтинг: {{way.rating}}</h3>
+      <h3>Населенный пункт: </h3>
+      <p>Длина маршрута: </p>
+      <p>Автор: {{way.user_id}} (Пока что это id Пользователя)</p>
+      <p style="max-width: 500px;">Тут надо вставить ссылку подробнее {{way.body}}</p>
+      <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select></p>
+      <textarea name="message"></textarea>
 
 
-    <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
+      <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
 
 
+
+    </div>
 
   </div>
 
-</div>
 
 
-
-    <div>Отзывы: </div>
-<ul id="comentList">
-             {{#each comment}}
-            <li style="border: 1px solid black;">
-              <div id="comment"></div>
-                  <h3><b><a href="/user/{{this.user_id}}">User:(Пока что это id Пользователя)</a></b></h3> <span>Оценка: {{this.rating}}</span>
-                  <p>Отзыв: {{this.text}}</p>
-            </li>
-          {{/each}}
-          </ul>
- {{/if}}
-
+  <div>Отзывы: </div>
+  <ul id="comentList">
+    {{#each comment}}
+    <li style="border: 1px solid black;">
+      <div id="comment"></div>
+      <h3><b><a href="/user/{{this.user_id}}">User:(Пока что это id Пользователя)</a></b></h3> <span>Оценка:
+        {{this.rating}}</span>
+      <p>Отзыв: {{this.text}}</p>
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
