@@ -3,7 +3,7 @@ const {Way, User, Comment} = require('../db/models/');
 
 exports.sortWays = async (id) => {
 // const sortWays = async (id) => {
-  console.log(2134353465346)
+  // console.log(2134353465346)
   switch (id) {
     case 1: // по рейтингу
       return ways1 = await Way.findAll({order:[['id', 'ASC']], raw:true});
@@ -18,7 +18,7 @@ exports.sortWays = async (id) => {
 
 exports.sortRating = (ways) => {
   // const sortWays = async (id) => {
-    console.log('sort')
+    // console.log('sort')
     return ways.sort((a, b) => b.rating - a.rating)
   };
 

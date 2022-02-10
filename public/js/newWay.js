@@ -43,5 +43,5 @@ async function createEntryesWay(arrCoord = []) {
     distance: distance[0]?.textContent || 'Расстояние неопределено'
   }
   // здесь делаем фетч
-  console.log(obj)
+  // console.log(obj)
 }

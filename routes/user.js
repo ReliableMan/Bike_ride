@@ -74,7 +74,7 @@ router.put('/admin/:id', async (req, res) => {
   let user
   let editUser
   let userQuest
-  console.log('////////////////////////',res.locals?.username);
+  // console.log('////////////////////////',res.locals?.username);
   // let userInfo;
   try {
     userQuest = await User.findOne({
@@ -84,15 +84,15 @@ router.put('/admin/:id', async (req, res) => {
         attributes: ['role']
       }], raw: true 
     })
-    console.log('............///////////////..',userQuest['UserInfo.role'] === 'admin')
+    // console.log('............///////////////..',userQuest['UserInfo.role'] === 'admin')
       if (userQuest['UserInfo.role'] === 'admin') {
-        console.log('..............', 444444444444)
+        // console.log('..............', 444444444444)
         editUser = await UserInfo.update({
           role: req.body.role
         },{where:{user_id:req.body.user_id}})
         //  {where:{user_id:req.body.user_id}, returning: true});
       }
-      console.log('..............', editUser)
+      // console.log('..............', editUser)
   } catch (error) {
     return res.json({ message: 'Не удалось обновить запись в базе данных.' });
   }
@@ -130,7 +130,7 @@ router.put('/edit/:id', async (req, res) => {
         });
       }
       
-    console.log('------------------86', finddit)
+    // console.log('------------------86', finddit)
   } catch (error) {
     // return res.json({ message: 'Не удалось обновить запись в базе данных.' });
   }
@@ -170,7 +170,7 @@ router.get('/:id', async (req, res) => {
   user.city = user['UserInfo.city']
   user.bike = user['UserInfo.bike']
   if (userlogIn['UserInfo.role'] === 'admin' || userlogIn.id == user.id) user.userHome = true
-  console.log( userlogIn)
+  // console.log( userlogIn)
   res.render('userProfile', {user , userlogIn})
 })
 // /////////////////////////////////////////////////////////////////

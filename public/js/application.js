@@ -45,7 +45,7 @@ function deletComment() {
   delComment.forEach((del, ind) => {
     del.addEventListener('click', async (event) => {
       event.preventDefault();
-      console.log(del.href)
+      // console.log(del.href)
       const response = await fetch(del.href, {
         method: "DELETE",
         headers: {
@@ -125,7 +125,7 @@ btnEnterEditProfile[0]?.addEventListener('click', async () => {
 
 
 function addAdmin() {
-  console.log(234243)
+  // console.log(234243)
   const adm = document.getElementById('adm')
   let btnToAddAdmin = [...document.getElementsByClassName('btnToAddAdmin')];
   let btnToDelAdmin = [...document.getElementsByClassName('btnToDelAdmin')];
@@ -155,7 +155,7 @@ function addAdmin() {
   })
 
   btnToDelAdmin[0]?.addEventListener('click', async () => {
-    console.log('------------------', btnToDelAdmin[0].id)
+    // console.log('------------------', btnToDelAdmin[0].id)
     const id = btnToDelAdmin[0].id;
     const response = await fetch(`/user/admin/${btnToDelAdmin[0].id}`, {
       method: "PUT",
