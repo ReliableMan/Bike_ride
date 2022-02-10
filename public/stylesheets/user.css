@@ -1,4 +1,16 @@
-юmainaboutUser{
+.mainaboutUser{
 
 }
 
+h2{
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(5, 59, 95);;
+}
+h3{
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(5, 59, 95);;
+}
+p{
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(5, 59, 95);;
+}
