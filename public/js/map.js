@@ -1,67 +1,14 @@
 /* eslint-disable max-len */
 ymaps.ready(init);
-
 function init() {
   const { geolocation } = ymaps;
-
-  const myPersonalMap = new ymaps.Map('map', {
+  const myMap = new ymaps.Map('map', {
     center: [55, 34],
     zoom: 10,
-    controls: ['zoomControl', 'searchControl', 'typeSelector', 'fullscreenControl', 'routeButtonControl'],
+    controls: ['routePanelControl'],
   }, {
     searchControlProvider: 'yandex#search',
   });
-  let myPlacemark;
-  myPersonalMap.events.add('click', (e) => {
-    const coords = e.get('coords');
-
-    // Если метка уже создана – просто передвигаем ее.
-    if (myPlacemark) {
-      myPlacemark.geometry.setCoordinates(coords);
-    }
-    // Если нет – создаем.
-    else {
-      myPlacemark = createPlacemark(coords);
-      myPersonalMap.geoObjects.add(myPlacemark);
-      // Слушаем событие окончания перетаскивания на метке.
-      myPlacemark.events.add('dragend', () => {
-        getAddress(myPlacemark.geometry.getCoordinates());
-      });
-    }
-    getAddress(coords);
-  });
-
-  // Создание метки.
-  function createPlacemark(coords) {
-    return new ymaps.Placemark(coords, {
-      iconCaption: 'поиск...',
-    }, {
-      preset: 'islands#violetDotIconWithCaption',
-      draggable: true,
-    });
-  }
-
-  // Определяем адрес по координатам (обратное геокодирование).
-  function getAddress(coords) {
-    myPlacemark.properties.set('iconCaption', 'поиск...');
-    ymaps.geocode(coords).then((res) => {
-      const firstGeoObject = res.geoObjects.get(0);
-
-      myPlacemark.properties
-        .set({
-          // Формируем строку с данными об объекте.
-          iconCaption: [
-            // Название населенного пункта или вышестоящее административно-территориальное образование.
-            firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
-            // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
-            firstGeoObject.getThoroughfare() || firstGeoObject.getPremise(),
-          ].filter(Boolean).join(', '),
-          // В качестве контента балуна задаем строку с адресом объекта.
-          balloonContent: firstGeoObject.getAddressLine(),
-        });
-    });
-  }
-
   // Сравним положение, вычисленное по ip пользователя и
   // положение, вычисленное средствами браузера.
   geolocation.get({
@@ -73,7 +20,7 @@ function init() {
     result.geoObjects.get(0).properties.set({
       balloonContentBody: 'Мое местоположение',
     });
-    myPersonalMap.geoObjects.add(result.geoObjects);
+    myMap.geoObjects.add(result.geoObjects);
   });
   geolocation.get({
     provider: 'browser',
@@ -82,19 +29,51 @@ function init() {
     // Синим цветом пометим положение, полученное через браузер.
     // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
     result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
-    myPersonalMap.geoObjects.add(result.geoObjects);
+    myMap.geoObjects.add(result.geoObjects);
+    // const loc = myMap.geoObjects.add(result.geoObjects);
+    // console.log(loc);
   });
   const multiRoute = new ymaps.multiRouter.MultiRoute({
-    referencePoints: [],
-  }, {
-    editorDrrawOver: false,
-    editorMidPointsType: 'via',
+    referencePoints: [
+      'Москва, метро Сокол',
+      'Москва, метро Павелецкая',
+    ],
   });
   // Включение режима редактирования.
-  multiRoute.editor.start({
-    addWayPoints: false,
-    removeWayPoints: true,
-    addMidPoints: true,
+  multiRoute.editor.start();
+  // А вот так можно отключить режим редактирования.
+  // Добавление маршрута на карту.
+  myMap.geoObjects.add(multiRoute);
+  const control = myMap.controls.get('routePanelControl');
+  control.routePanel.state.set({
+    type: 'bicycle', // пешком
   });
-  myPersonalMap.geoObjects.add(multiRoute);
+  control.routePanel.options.set({
+    types: {
+      pedestrian: true,
+      bicycle: true,
+      taxi: true,
+    },
+  });
 }
+
+const arr = [];
+const time = setInterval(() => {
+  const input = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
+  if (input.length && input[0].value !== '<empty string>'
+    && input[0].value !== '') {
+    let x; let
+      y;
+    x = input[0].value.split(',').map((el) => parseFloat(el));
+    if (!isNaN(x[0])) arr.push(x);
+    if (input.length && input[1].value !== '<empty string>' && input[1].value !== '') {
+      y = input[1].value.split(',').map((el) => parseFloat(el));
+      if (y[0]) arr.push(y);
+      clearInterval(time);
+      let tochkaA = arr[0];
+      let tochkaB = arr.pop();
+      console.log(...tochkaA);
+      console.log(...tochkaB);
+    }
+  }
+}, 100);
