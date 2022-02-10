@@ -147,9 +147,9 @@ router.post('/', async (req, res) => {
   return res.redirect(`/ways/${newWay.id}`);
 });
 // ////////////////////////////////////////////////////////////
-// router.get('/new', (req, res) => {
-//   res.render('ways/new');
-// });
+router.get('/new', (req, res) => {
+  res.render('newRoad');
+});
 // ////////////////////////////////////////////////////////////
 router.get('/:id', async (req, res) => {
   let way;
