@@ -22,7 +22,7 @@ input[type=text], input[type=password] {
   background: #F1F1F1;
 }
 input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
+  background-color: rgb(176, 210, 230);
   outline: none;
 }
 /* Overwrite default styles of hr */
@@ -32,7 +32,7 @@ hr {
 }
 /* Set a style for the submit button */
 .registerbtn {
-  background-color: #a8a63c;
+  background-color: rgb(5, 59, 95); 
   color: rgb(0, 0, 0);
   padding: 16px 20px;
   margin: 8px 0;
