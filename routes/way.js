@@ -62,6 +62,27 @@ router.get('/sort/:id', async (req, res) => {
   return res.json({ ways, user });
 });
 // ////////////////////////////////////////////////////////////
+router.delete('/comment/delete/:id', async (req, res) => {
+  console.log(req.params.id)
+  let delet;
+  let comment;
+  try {
+    userlogIn = await User.findOne({where: {name: res.locals?.username}, include: [{model: UserInfo, attributes: ['role']}], raw: true})
+    comment = await Comment.findOne({where:{id: req.params.id}, raw: true});
+    if (userlogIn.id === comment.user_id || userlogIn['UserInfo.role'] === 'admin') {
+      delet = await Comment.destroy({where:{id:req.params.id}});
+    }
+  } catch (error) {
+    return res.render('error', {
+      message: 'Не удалось удалить запись из базы данных.',
+      error: {}
+    });
+  }
+  return res.json({delet});
+
+})
+
+
 router.post('/comment', async (req, res) => {
   let newComment;
   let user;
@@ -70,11 +91,13 @@ router.post('/comment', async (req, res) => {
   try {
     user = await User.findOne({where: {name: res.locals?.username}, raw: true})
     // console.log(req.body.text, req.body.rating, req.body.way_id, user.id)
-    newComment = await Comment.create({ text: req.body.text, rating: req.body.rating, user_id: user.id, way_id: req.body.way_id});
+    newComment = await Comment.create({ text: req.body.text, rating: req.body.rating, user_id: user.id, way_id: req.body.way_id},{returning: true,plain: true});
     // console.log('fsdgdfgfhfjhfdjh2')
     // console.log(newComment)
     const comment = await Comment.findAll({where: {way_id: req.body.way_id}, raw: true})
     newRating = Number((comment.reduce((acc, el) => acc+= el.rating, 0) / comment.length).toFixed(2)) || 'рейтинг отсутствует';
+    newComment.dataValues.username = user.name
+    console.log(newComment)
   } catch (error) {
     return res.json({ isUpdateSuccessful: false, errorMessage: 'Не удалось обновить запись в базе данных.' });
   }
@@ -109,13 +132,18 @@ router.get('/:id', async (req, res) => {
   // let rating;
   // console.log(req.params.id)
   try {
-    userlogIn = await User.findOne({where: {name: res.locals?.username}, raw: true})
+    userlogIn = await User.findOne({where: {name: res.locals?.username}, include: [{model: UserInfo, attributes: ['role']}], raw: true})
     way = await Way.findOne({where:{id:req.params.id}, include: [{model: User, attribute: ['name']}], raw: true});
-    comment = await Comment.findAll({where:{way_id: way.id}, include: [{model: User, attribute: ['name']}], raw: true});
-    way.rating = (comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2);
-    // console.log(comment.length)
+    comment = await Comment.findAll({where:{way_id: way.id}, order:[['createdAt', 'DESC']], include: [{model: User, attribute: ['name']}], raw: true});
+    way.rating = Number((comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2)) || 'рейтинг отсутствует';
+    console.log(way)
     way.nameUser = way['User.name']
     // comment.nameUser = comment['User.name']
+    comment.forEach(el => {
+      if (el.user_id === userlogIn.id || userlogIn['UserInfo.role'] === 'admin') el.isGrantDelComm = true
+      return el;
+    })
+
   } catch (error) {
     return res.render('error', {
       message: 'Не удалось получить запись из базы данных.',
@@ -123,9 +151,9 @@ router.get('/:id', async (req, res) => {
     });
   }
   comment.forEach(el => el.nameUser = el['User.name'])
-  if (userlogIn.id === way.user_id || userlogIn.role === 'admin') userlogIn.isGrantDel = true
-
-  // console.log(comment)
+  if (userlogIn.id === way.user_id || userlogIn['UserInfo.role'] === 'admin') userlogIn.isGrantDelWay = true
+  
+  console.log(comment)
   return res.render('infoRoad', { way, comment, userlogIn });
 });
 // ////////////////////////////////////////////////////////////
