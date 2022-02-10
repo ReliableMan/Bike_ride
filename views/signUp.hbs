@@ -11,17 +11,16 @@
 	
 <form id="signupForm" method="POST" action="/user/signup">
   <div class="form-container">
-    <h1 id=formTitle>Регистрация</h1>
-    <hr>
-    <label for="name"><b>Ваше имя</b></label>
-    <input id="username" type="text" placeholder="Enter name" name="name" required pattern="[A-Za-z]\w+"
+    <h2 class="form-title" id="formTitle">Регистрация</h2>
+   
+    <div class="form-holder">
+    <input id="username" class="input" type="text" placeholder="Enter name" name="name" required pattern="[A-Za-z]\w+"
       title="Латинские буквы, цифры и _">
-    <label for="email"><b>Ваш e-mail</b></label>
-    <input id="email" type="text" placeholder="Enter e-mail" name="email" required
+    <input id="email" class="input" type="text" placeholder="Enter e-mail" name="email" required
       pattern="^[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\.[A-Za-z]{2,}$">
-    <label for="password"><b>Пароль</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-    <hr>
+    <input type="password" class="input" placeholder="Enter Password" name="password" required>
+    
+    </div>
     <button type="submit" class="registerbtn">Регистрация</button>
   </div>
 </form

@@ -1,29 +1,62 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 body {
   /* position: absolute; */
-  background-image: url('https://mota.ru/upload/wallpapers/source/2012/11/21/08/01/33513/mota_ru_2112130.jpg');
-  background-color: rgb(53, 68, 68);
   font-family: "Fira Sans", Helvetica, Arial, sans-serif;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size:cover
 }
-.form-structor {
+.form-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
   height: 550px;
   width: auto;
 }
-
-.form-structor .signup .form-title {
+input{
+  color:rgb(5, 59, 95);
+  width:300px;
+  resize: vertical;
+  padding:15px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+  height:20px;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 20px;
+  } 
+button{
+  border-radius: 15px;
+  background: transparent;
+  color: rgb(100, 98, 98);
+  border: 1px solid black;
+  font-size: 15px;
+  letter-spacing: 2px;
+  padding: 20px 75px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-block;
+  margin: 15px 30px;
+  -webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	transition: all 0.4s;
+}
+button:hover, button:focus {
+  background-color: rgb(58, 78, 92);
+  color: #333333;
+}
+.form-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-container .signup .form-title {
   color: #fff;
   font-size: 1.7em;
   text-align: center;
 }
-.form-structor .signup .form-holder {
+.form-container .signup .form-holder {
   border-radius: 15px;
   background-color: #fff;
   overflow: hidden;
@@ -32,7 +65,7 @@ body {
   visibility: visible;
   -webkit-transition: all 0.3s ease;
 }
-.form-structor .signup .form-holder .input {
+.form-container .signup .form-holder .input {
   border: 0;
   outline: none;
   box-shadow: none;
@@ -44,13 +77,13 @@ body {
   width: 100%;
   font-size: 12px;
 }
-.form-structor .signup .form-holder .input:last-child {
+.form-container .signup .form-holder .input:last-child {
   border-bottom: 0;
 }
-.form-structor .signup .form-holder .input::-webkit-input-placeholder {
+.form-container .signup .form-holder .input::-webkit-input-placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
-.form-structor .signup .submit-btn {
+.form-container .signup .submit-btn {
   background-color: rgba(0, 0, 0, 0.4);
   color: rgba(255, 255, 255, 0.7);
   border: 0;
@@ -66,7 +99,7 @@ body {
   visibility: visible;
   -webkit-transition: all 0.3s ease;
 }
-.form-structor .signup .submit-btn:hover {
+.form-container .signup .submit-btn:hover {
   transition: all 0.3s ease;
   background-color: rgba(0, 0, 0, 0.8);
 }
