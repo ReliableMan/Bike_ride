@@ -5,7 +5,7 @@
  <div class="mainConteiner" id="{{way.id}}">
       <div id="map" style="width: 600px; height: 400px"></div>
       <div class="inform">
-        <h2>Название маршрута: {{way.title}} </h2>
+        <h2> {{way.title}} </h2>
         <h3 id="rating">Рейтинг: {{way.rating}}</h3>
         <h3>Населенный пункт: {{way.city}} </h3>
         <p>Длина маршрута:  {{way.distance}}</p>
@@ -18,7 +18,7 @@
                               <option value="2">2</option>
                               <option value="1">1</option>
                             </select></p>
-        <textarea name="message" ></textarea>
+        <textarea name="message" class="message" ></textarea>
 
 
     <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
@@ -33,7 +33,7 @@
 
 
 
-    <div>Отзывы: </div>
+    <div><h2>Отзывы:</h2></div>
 <ul id="comentList">
              {{#each comment}}
             <li class="commentList" style="border: 1px solid black;">
