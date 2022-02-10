@@ -33,7 +33,7 @@ const time = setInterval(() => {
 
 async function createEntryesWay(arrCoord = []) {
   const distance = [...document.getElementsByClassName('ymaps-2-1-79-transport-pin__text')]
-  const obj = {
+  const dataNewWay = {
     wayTitle: wayTitle.value,
     wayCity: wayCity.value,
     wayImage: wayImage.value,
@@ -42,6 +42,14 @@ async function createEntryesWay(arrCoord = []) {
     xy2: arrCoord.pop(),
     distance: distance[0]?.textContent || 'Расстояние неопределено'
   }
+  const response = await fetch('/ways/new', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataNewWay)
+  });
+  const {newComment, newRating} = await response.json();
   // здесь делаем фетч
   // console.log(obj)
 }
