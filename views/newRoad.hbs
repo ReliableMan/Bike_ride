@@ -1,0 +1,28 @@
+ <div class="mainConteiner" id="{{way.id}}">
+      <div id="map" style="width: 600px; height: 400px"></div>
+      <div class="inform">
+        <form id="signinForm" method="POST" action="">
+      <div class="foto">
+        <input ageIn id="wayImage" class="form-control" name="name" type="text" required placeholder="Введите ссылку изображения маршрута" value="{{user.age}}">
+      </div>
+      <div class="form-group">
+        <input bike id="wayTitle" class="form-control" name="name" type="text" required placeholder="Название маршрута" value="{{user.bike}}">
+      </div>
+      <div class="city">
+        <input  id="wayCity" class="form-control" name="name" type="text" required placeholder="Город" value="{{user.city}}">
+      </div>
+    </form>
+    <div class="aboutMe">
+    <textarea name="text" class="about_me" id="wayText" placeholder="Подробная информация о маршруте" >{{user.about_me}}</textarea>
+  </div>
+   {{#if user.userRole}}
+      <button id="{{user.id}}" class="btn btnEditWay">Изменить</button>
+      {{else }}
+      <button id="{{user.id}}" class="btn btnNewWay">Создать</button>
+      {{/if}}</div>
+        {{!-- <p>Длина маршрута: </p> --}}
+        {{!-- <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p> --}}
+
+</div>
+
+</div>

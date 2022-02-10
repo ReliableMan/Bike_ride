@@ -65,19 +65,19 @@ function init() {
 
 
 
-const arr = []
-const time = setInterval(() => {
-  const input = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-  if (input.length && input[0].value !== `<empty string>` 
-  && input[0].value !=='' ) {
-    let x, y;
-    x = input[0].value.split(',').map(el=> parseFloat(el))
-    if (!isNaN(x[0])) arr.push(x)
-      if (input.length && input[1].value !== `<empty string>` && input[1].value !=='') {
-        y = input[1].value.split(',').map(el=> parseFloat(el))
-        if (y[0]) arr.push(y)
-        clearInterval(time);
-        console.log(arr);
-      }
-  }
-}, 100);
+// const arr = []
+// const time = setInterval(() => {
+//   const input = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
+//   if (input.length && input[0].value !== `<empty string>` 
+//   && input[0].value !=='' ) {
+//     let x, y;
+//     x = input[0].value.split(',').map(el=> parseFloat(el))
+//     if (!isNaN(x[0])) arr.push(x)
+//       if (input.length && input[1].value !== `<empty string>` && input[1].value !=='') {
+//         y = input[1].value.split(',').map(el=> parseFloat(el))
+//         if (y[0]) arr.push(y)
+//         clearInterval(time);
+//         console.log(arr);
+//       }
+//   }
+// }, 100);
