@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const { Way, User, UserInfo } = require('./db/models/');
 
 // async function qwer() {
@@ -24,3 +25,4 @@ async function qwer() {
 
 //qwer()
 //qwer()
+
