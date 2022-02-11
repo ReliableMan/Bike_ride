@@ -2,7 +2,7 @@
 let poleVvoda = document.getElementsByClassName('poleVvoda')
 const coordInfo = document.getElementsByClassName('coordInfo');
 const arr5 = coordInfo[0]?.id
-const obj = {start: arr5?.split('/')[0].replace('_', ', ') || 'Москва, метро Сокол', end: arr5?.split('/')[1].replace('_', ', ') || 'Москва, метро Павелецкая'}
+const obj = {start: arr5?.split('/')[0].replace('_', ', ') || 'Москва, метро Сокол', end: arr5?.split('/')[1].replace('_', ', ') || 'Москва, метро Павелецкая', dist: arr5?.split('/')[2] || 'расстояние не определено'}
 console.log(obj) // нам нужна подобная строка формата "56.33821041, 36.74362897"
 const wayImage = document.getElementById('wayImage');
 const wayTitle = document.getElementById('wayTitle');

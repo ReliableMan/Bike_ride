@@ -10,7 +10,7 @@
     <h3 id="ratingAll">Рейтинг: {{way.rating}}</h3>
     <h3>Населенный пункт: {{way.city}} </h3>
     <p>Длина маршрута: {{way.distance}}</p>
-    <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
+    <p>Автор: <a style="color: rgb(20, 18, 48);" href="/user/{{way.user_id}}">{{way.nameUser}}</a></p>
     <p style="max-width: 500px;">{{way.body}}</p>
     <div id="{{way.xy_start}}/{{way.xy_end}}" class="coordInfo"></div>
     <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">

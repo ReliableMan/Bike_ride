@@ -1,7 +1,8 @@
-// poleVvoda = document.getElementsByClassName('poleVvoda')
+poleVvoda = document.getElementsByClassName('poleVvoda')
 
 const arrCoord = []
-const time = setInterval(() => {
+
+  const time = setInterval(() => {
   const input = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
   if (input.length && input[0].value !== `<empty string>`
   && input[0].value !=='' ) {
@@ -19,6 +20,11 @@ const time = setInterval(() => {
       }
   }
 }, 100);
+
+
+
+
+
 
 
 async function createEntryesWay(arrCoord = []) {
@@ -79,9 +85,9 @@ async function editEntryesWay(arrCoordEdit = []) {
     wayCity: wayCity.value,
     wayImage: wayImage.value,
     wayText: wayText.value,
-    xy1: arrCoordEdit[0],
-    xy2: arrCoordEdit.pop(),
-    distance: distanceEdit[0]?.textContent || 'Расстояние неопределено'
+    xy1: arrCoordEdit[0] || obj.start,
+    xy2: arrCoordEdit.pop() || obj.end,
+    distance: distanceEdit[0]?.textContent|| obj.dist || 'Расстояние неопределено'
   }
   console.log(dataWayEdit);
   const response = await fetch(`/ways/edit/${btnEditWay[0].id}`, {
@@ -107,28 +113,30 @@ async function editEntryesWay(arrCoordEdit = []) {
 
 
 
-// if (poleVvoda[0].id === 'edit') {
-//   const timeFill = setInterval(() => {
-//     const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-//     if (inputFill[0] && inputFill[1]) {
-//       // inputFill[0].value = obj.start
-//       // inputFill[1].value = obj.end
+if (poleVvoda[0].id === 'edit') {
+  const timeFill = setInterval(() => {
+    const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
+    if (inputFill[0] && inputFill[1]) {
+      // inputFill[0].value = obj.start
+      // inputFill[1].value = obj.end
 
-//       // let xEdit, yEdit;
-//       // // console.log(inputEdit[0].value)
-//       // xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
-//       // if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
-//       //   if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
-//       //     yEdit = inputEdit[1].value.split(',').map(el=> parseFloat(el));
-//       //     if (yEdit[0]) arrCoordEdit.push(yEdit);
-//           clearInterval(timeFill);
-//       //     btnEditWay[0]?.addEventListener('click', () => {
-//       //       editEntryesWay(arrCoordEdit);
-//       //     })
-//       //   }
-//     }
-//   }, 100);
-// }
+
+      // if (inputFill[1].value === '') run()
+      // let xEdit, yEdit;
+      // // console.log(inputEdit[0].value)
+      // xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
+      // if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
+      //   if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
+      //     yEdit = inputEdit[1].value.split(',').map(el=> parseFloat(el));
+      //     if (yEdit[0]) arrCoordEdit.push(yEdit);
+          clearInterval(timeFill);
+      //     btnEditWay[0]?.addEventListener('click', () => {
+      //       editEntryesWay(arrCoordEdit);
+      //     })
+      //   }
+    }
+  }, 100);
+}
 
 // <<<<<<< newRoad5
 // =======
