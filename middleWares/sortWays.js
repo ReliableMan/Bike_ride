@@ -21,6 +21,12 @@ exports.sortRating = (ways) => {
     // console.log('sort')
     return ways.sort((a, b) => b.rating - a.rating)
   };
+exports.sortDistance = (ways) => {
+    // const sortWays = async (id) => {
+      // console.log('sort')
+      return ways.sort((a, b) => b.distance - a.distance)
+    };
+
 
 
 // module.exports = sortWays
