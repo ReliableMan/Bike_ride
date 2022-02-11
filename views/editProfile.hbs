@@ -20,28 +20,17 @@
   <div class="aboutMe">
     <textarea name="text" class="about_me" id="about_me" placeholder="О себе" >{{user.about_me}}</textarea>
   </div>
-  <div class="aboutMe">
-    <button id="{{user.id}}" class="btn btnEnterEditProfile">Редактировать</button>
-    {{#if userlogIn.isAdmin}}
-      <div id="adm">
-      {{#if user.userRole}}
-      <button id="{{user.id}}" class="btn btnToAddAdmin">Установить права администратора</button>
-      {{else }}
-      <button id="{{user.id}}" class="btn btnToDelAdmin">Удалить права администратора</button>
-      {{/if}}</div>
-    {{/if}}
-  </div>
+    <div class="aboutMe">
+      <button id="{{user.id}}" class="btn btnEnterEditProfile">Редактировать</button>
+      {{#if userlogIn.isAdmin}}
+        <div id="adm">
+        {{#if user.userRole}}
+        <button id="{{user.id}}" class="btn form-control btnToAddAdmin">Установить права администратора</button>
+        {{else }}
+        <button id="{{user.id}}" class="btn form-control btnToDelAdmin">Удалить права администратора</button>
+        {{/if}}</div>
+      {{/if}}
+    </div>
   </div>
 {{/if}}
-  <div class="myRoutes">
-    <label for="username">Мои маршруты:</label>
-    <ul>
-      <li>маршрут 1</li>
-      <li>маршрут 2</li>
-      <li>маршрут 3</li>
-      <li>маршрут 4</li>
-    </ul>
-  </div>
-  </div>
 
-// спросить про редактирование личного кабинета, маршруты

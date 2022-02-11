@@ -2,8 +2,15 @@
 const coordInfo = document.getElementsByClassName('coordInfo');
 const arr5 = coordInfo[0]?.id
 const obj = {start: arr5?.split('/')[0].replace('_', ', ') || 'Москва, метро Сокол', end: arr5?.split('/')[1].replace('_', ', ') || 'Москва, метро Павелецкая'}
-
+const poleVvoda = document.getElementsByClassName('poleVvoda')
 console.log(obj) // нам нужна подобная строка формата "56.33821041, 36.74362897"
+const wayImage = document.getElementById('wayImage');
+const wayTitle = document.getElementById('wayTitle');
+const wayCity = document.getElementById('wayCity');
+const wayText = document.getElementById('wayText');
+
+const btnNewWay = [...document.getElementsByClassName('btnNewWay')];
+const btnEditWay = [...document.getElementsByClassName('btnEditWay')];
 
 
 ymaps.ready(init);
@@ -29,17 +36,31 @@ function init() {
     });
     myMap.geoObjects.add(result.geoObjects);
   });
-  geolocation.get({
-    provider: 'browser',
-    mapStateAutoApply: true,
-  }).then((result) => {
-    // Синим цветом пометим положение, полученное через браузер.
-    // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
-    result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
-    myMap.geoObjects.add(result.geoObjects);
-    // const loc = myMap.geoObjects.add(result.geoObjects);
-    // console.log(loc);
-  });
+  if (poleVvoda[0].id === 'info') {
+  // geolocation.get({
+  //   provider: 'browser',
+  //   mapStateAutoApply: true,
+  // }).then((result) => {
+  //   // Синим цветом пометим положение, полученное через браузер.
+  //   // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
+  //   result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
+  //   myMap.geoObjects.add(result.geoObjects);
+  //   // const loc = myMap.geoObjects.add(result.geoObjects);
+  //   // console.log(loc);
+  // });
+  } else {
+    geolocation.get({
+      provider: 'browser',
+      mapStateAutoApply: true,
+    }).then((result) => {
+      // Синим цветом пометим положение, полученное через браузер.
+      // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
+      result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
+      myMap.geoObjects.add(result.geoObjects);
+      // const loc = myMap.geoObjects.add(result.geoObjects);
+      // console.log(loc);
+    });
+  }
   const multiRoute = new ymaps.multiRouter.MultiRoute({
     referencePoints: [
       // 'Москва, метро Сокол',

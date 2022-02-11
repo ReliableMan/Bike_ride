@@ -14,3 +14,9 @@ p{
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(5, 59, 95);;
 }
+
+.aboutMe{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

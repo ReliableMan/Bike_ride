@@ -26,10 +26,12 @@
     <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
     {{#if userlogIn.isEditor}}
 
+
     <span><a class="deleteRoad" href="/ways/delete/{{way.id}}">Удалить маршрут</a> | <a class="editRoad" href="/ways/edit/{{way.id}}">Редактировать маршрут</a></span>
 
 
     {{/if}}
+
 
 
   </div>
@@ -38,22 +40,24 @@
 
 
 <div class="boxComment">
-  <div class="otziyv">
-    <h2>Отзывы:</h2>
-    <div class="footer-line"></div>
-  </div>
-  <ul id="comentList">
-    {{#each comment}}
-    <li class="commentList">
-      <div id="comment"></div>
-      <h3><b><a href="/user/{{this.user_id}}">User:{{this.nameUser}}</a></b></h3> <span>Оценка: {{this.rating}}</span>
-      <p class="pshka">{{this.text}}</p>
-      {{#if this.isGrantDelComm}}
-      <a class="delComment" href="/ways/comment/delete/{{this.id}}">Удалить комментарий </a>
 
-      {{/if}}
-    </li>
-    {{/each}}
-  </ul>
-  {{/if}}
+<div class="otziyv">
+  <h2>Отзывы:</h2>
+<div class="footer-line"></div>
+</div>
+<ul id="comentList">
+  {{#each comment}}
+  <li class="commentList">
+    <div id="comment"></div>
+    <h3><b><a href="/user/{{this.user_id}}">User:{{this.nameUser}}</a></b></h3> <span>Оценка: {{this.rating}}</span>
+    <p class="pshka">{{this.text}}</p>
+    {{#if this.isGrantDelComm}}
+    <a class="delComment" style="color: rgb(20, 18, 48);" href="/ways/comment/delete/{{this.id}}">Удалить комментарий </a>
+
+    {{/if}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+
 </div>
