@@ -247,7 +247,7 @@ router.get('/delete/:id', async (req, res) => {
       where: {name: res.locals?.username},
       include: [{
         model: UserInfo,
-        attributes: ['bike'], // добавить role
+        attributes: ['role'], // добавить role
       }],
       raw: true
     })

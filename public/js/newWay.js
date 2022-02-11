@@ -1,10 +1,4 @@
-const wayImage = document.getElementById('wayImage');
-const wayTitle = document.getElementById('wayTitle');
-const wayCity = document.getElementById('wayCity');
-const wayText = document.getElementById('wayText');
 
-const btnNewWay = [...document.getElementsByClassName('btnNewWay')];
-const btnEditWay = [...document.getElementsByClassName('btnEditWay')];
 
 const arrCoord = []
 const time = setInterval(() => {
@@ -27,9 +21,9 @@ const time = setInterval(() => {
 }, 100);
 
 
-
 async function createEntryesWay(arrCoord = []) {
   const distance = [...document.getElementsByClassName('ymaps-2-1-79-transport-pin__text')];
+  console.log(distance)
   const dataNewWay = {
     wayTitle: wayTitle.value,
     wayCity: wayCity.value,
@@ -107,25 +101,27 @@ async function editEntryesWay(arrCoordEdit = []) {
 // const obj = {start: arr5.split('/')[0].replace('_', ', '), end: arr5.split('/')[1].replace('_', ', ')}
 
 // console.log(obj) // нам нужна подобная строка формата "56.33821041, 36.74362897"
+console.log(poleVvoda[0].id)
+if (poleVvoda[0].id === 'edit') {
+  const timeFill = setInterval(() => {
+    const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
+    if (inputFill[0] && inputFill[1]) {
+      // inputFill[0].value = obj.start
+      // inputFill[1].value = obj.end
 
+      // let xEdit, yEdit;
+      // // console.log(inputEdit[0].value)
+      // xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
+      // if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
+      //   if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
+      //     yEdit = inputEdit[1].value.split(',').map(el=> parseFloat(el));
+      //     if (yEdit[0]) arrCoordEdit.push(yEdit);
+          clearInterval(timeFill);
+      //     btnEditWay[0]?.addEventListener('click', () => {
+      //       editEntryesWay(arrCoordEdit);
+      //     })
+      //   }
+    }
+  }, 100);
+}
 
-const timeFill = setInterval(() => {
-  const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-  if (inputFill[0] && inputFill[1]) {
-    inputFill[0].value = obj.start
-    inputFill[1].value = obj.end
-
-    // let xEdit, yEdit;
-    // // console.log(inputEdit[0].value)
-    // xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
-    // if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
-    //   if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
-    //     yEdit = inputEdit[1].value.split(',').map(el=> parseFloat(el));
-    //     if (yEdit[0]) arrCoordEdit.push(yEdit);
-        clearInterval(timeFill);
-    //     btnEditWay[0]?.addEventListener('click', () => {
-    //       editEntryesWay(arrCoordEdit);
-    //     })
-    //   }
-  }
-}, 100);

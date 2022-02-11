@@ -28,7 +28,7 @@
 
     <span><a style="color: black;" href="/ways/delete/{{way.id}}">Удалить маршрут </a></span>   
     <span><a style="color: black;" href="/ways/edit/{{way.id}}">Редактировать маршрут </a></span>
-    
+    <div id="info" class="poleVvoda"></div>
  {{/if}}
 
 
@@ -49,7 +49,7 @@
     <h3><b><a href="/user/{{this.user_id}}">User:{{this.nameUser}}</a></b></h3> <span>Оценка: {{this.rating}}</span>
     <p class="pshka">{{this.text}}</p>
     {{#if this.isGrantDelComm}}
-    <a class="delComment" href="/ways/comment/delete/{{this.id}}">Удалить комментарий </a>
+    <a class="delComment" style="color: rgb(20, 18, 48);" href="/ways/comment/delete/{{this.id}}">Удалить комментарий </a>
 
     {{/if}}
   </li>

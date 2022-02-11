@@ -17,6 +17,6 @@ function renderNewComment(newComment) {
               <div id="comment"></div>
                   <h3><b><a href="/user/${newComment.user_id}">User:${newComment.username}</a></b></h3> <span>Оценка: ${newComment.rating}</span>
                   <p class="pshka">${newComment.text}</p>
-                  <a class="delComment" href="/ways/comment/delete/${newComment.id}">Удалить комментарий </a> </li>`
+                  <a class="delComment" style="color: rgb(20, 18, 48);" href="/ways/comment/delete/${newComment.id}">Удалить комментарий </a> </li>`
 }
 

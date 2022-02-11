@@ -166,9 +166,9 @@ router.get('/:id', async (req, res) => {
       ways = await ratingController(ways1);
         // console.log('---------------------', userlogIn)
   } catch (error) {
-    
+    return res.json({ message: 'Не получить данный из базы даных.' });
   }
-
+// console.log(user)
   user.age = user['UserInfo.age']
   user.about_me = user['UserInfo.about_me']
   user.city = user['UserInfo.city']
