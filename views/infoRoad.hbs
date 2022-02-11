@@ -2,49 +2,54 @@
 
 
 
- <div class="mainConteiner" id="{{way.id}}">
-      <div id="map" style="width: 600px; height: 400px"></div>
-      <div class="inform">
-        <h2> {{way.title}} </h2>
-        <h3 id="rating">Рейтинг: {{way.rating}}</h3>
-        <h3>Населенный пункт: {{way.city}} </h3>
-        <p>Длина маршрута:  {{way.distance}}</p>
-        <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
-        <p style="max-width: 500px;">{{way.body}}</p>
-        <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
-                              <option value="5">5</option>
-                              <option value="4">4</option>
-                              <option value="3">3</option>
-                              <option value="2">2</option>
-                              <option value="1">1</option>
-                            </select></p>
-        <textarea name="message" class="message" ></textarea>
+<div class="mainConteiner" id="{{way.id}}">
+  <div id="map" style="width: 700px; height: 700px"></div>
+  <div class="inform">
+    <h2> {{way.title}} </h2>
+    <h3 id="rating">Рейтинг: {{way.rating}}</h3>
+    <h3>Населенный пункт: {{way.city}} </h3>
+    <p>Длина маршрута: {{way.distance}}</p>
+    <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
+    <p style="max-width: 500px;">{{way.body}}</p>
+    <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+      </select></p>
+    <textarea name="message" class="message"></textarea>
 
 
     <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
-  {{#if userlogIn.isGrantDelWay}}
-    {{!-- <button id="btnComment btnDeleteWay" type="submit" name="submit_btn"><a href="/ways/delete/{{way.id}}">Удалить маршрут <button></button></a> </button> --}}
-     <a href="/ways/delete/{{way.id}}">Удалить маршрут </a>
+    {{#if userlogIn.isGrantDelWay}}
+    {{!-- <button id="btnComment btnDeleteWay" type="submit" name="submit_btn"><a href="/ways/delete/{{way.id}}">Удалить
+        маршрут <button></button></a> </button> --}}
+    <a href="/ways/delete/{{way.id}}">Удалить маршрут </a>
 
- {{/if}}
+    {{/if}}
   </div>
 
 </div>
 
 
-
-    <div><h2>Отзывы:</h2></div>
+<div class="boxComment">
+<div class="otziyv">
+  <h2>Отзывы:</h2>
+<div class="footer-line"></div>
+</div>
 <ul id="comentList">
-             {{#each comment}}
-            <li class="commentList" style="border: 1px solid black;">
-              <div id="comment"></div>
-                  <h3><b><a href="/user/{{this.user_id}}">User:{{this.nameUser}}</a></b></h3> <span>Оценка: {{this.rating}}</span>
-                  <p>Отзыв: {{this.text}}</p>
-                   {{#if this.isGrantDelComm}}
-                    <a class="delComment" href="/ways/comment/delete/{{this.id}}">Удалить комментарий </a>
+  {{#each comment}}
+  <li class="commentList">
+    <div id="comment"></div>
+    <h3><b><a href="/user/{{this.user_id}}">User:{{this.nameUser}}</a></b></h3> <span>Оценка: {{this.rating}}</span>
+    <p class="pshka">{{this.text}}</p>
+    {{#if this.isGrantDelComm}}
+    <a class="delComment" href="/ways/comment/delete/{{this.id}}">Удалить комментарий </a>
 
- {{/if}}
-            </li>
-          {{/each}}
-          </ul>
- {{/if}}
+    {{/if}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+</div>
