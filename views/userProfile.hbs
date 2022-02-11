@@ -20,10 +20,21 @@
 <div class="aboutMe">
   <p>{{user.about_me}}</p>
 </div>
-{{#if user.userHome}}
-<div class="aboutMe">
-  <button id="{{user.id}}" class="btn btnEditProfile">Редактировать</button>
+  {{#if userlogIn.isEditor}}
+  <div class="aboutMe">
+    <button id="{{user.id}}" class="btn btnEditProfile">Редактировать</button>
+  </div>
+  {{/if}}
 </div>
 {{/if}}
-</div>
-{{/if}}
+
+{{#each ways}}
+  <div class="rout" id="{{this.id}}">
+    <img src="{{this.url_img}}"
+      alt="sfgdsfghfd" class="img" width="200px" height="200px">
+    <h3>{{this.title}}</h3>
+    <button class="btn btnInfo" id="{{this.id}}">Посмотреть</button>
+    <p>Рейтинг: {{this.rating}}</p>
+    <p>Расстояние: {{this.distance}}</p>
+  </div>
+{{/each}}

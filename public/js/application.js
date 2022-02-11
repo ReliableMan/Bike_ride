@@ -9,43 +9,38 @@ const comentList = document.getElementById('comentList');
 const btnEditProfile = [...document.getElementsByClassName('btnEditProfile')];
 const btnEnterEditProfile = [...document.getElementsByClassName('btnEnterEditProfile')];
 
-// console.log(infoBtn)
   selector?.addEventListener('click', async () => {
-    // console.log(selector.value)
     const response = await fetch(`http://localhost:3000/ways/sort/${selector.value}`, {
-        method: "GET"})
-      const {ways} = await response.json(); // массив
+        method: "GET"});
+      const {ways} = await response.json();
 
-      routesList.innerHTML = ''
+      routesList.innerHTML = '';
       ways.forEach(way => {
-        // console.log(way)
         routesList.innerHTML += renderWayList(way)
       });
       infoBtn = [...document.getElementsByClassName('btnInfo')];
       infoBtn?.forEach((el,index) => {
         el.addEventListener('click', () => {
-          // console.log(5434534534654)
-          window.location = `http://localhost:3000/ways/${el.id}`
-        })
-      })
-  })
+          window.location = `http://localhost:3000/ways/${el.id}`;
+        });
+      });
+  });
 
 
 
 infoBtn?.forEach((el,index) => {
     el.addEventListener('click', () => {
-      window.location = `http://localhost:3000/ways/${el.id}`
-  })
-})
+      window.location = `http://localhost:3000/ways/${el.id}`;
+  });
+});
 
 
 function deletComment() {
-  const delComment = [...document.getElementsByClassName('delComment')]
-  const commentList = [...document.getElementsByClassName('commentList')]
+  const delComment = [...document.getElementsByClassName('delComment')];
+  const commentList = [...document.getElementsByClassName('commentList')];
   delComment.forEach((del, ind) => {
     del.addEventListener('click', async (event) => {
       event.preventDefault();
-      // console.log(del.href)
       const response = await fetch(del.href, {
         method: "DELETE",
         headers: {
@@ -53,18 +48,15 @@ function deletComment() {
         }
        });
       const {delet} = await response.json();
-      if (delet) commentList[ind].parentNode.removeChild(commentList[ind])
+      if (delet) commentList[ind].parentNode.removeChild(commentList[ind]);
       deletComment();
-    })
-  })
+    });
+  });
 }
 
 
 btnSubmitComment?.addEventListener('click', async () => {
-  // selectorRating.value
-  // console.log(selectorRating.value)
-  // console.log(commentMessage.value)
-  const rating = document.getElementById('rating')
+  const rating = document.getElementById('rating');
 
   const response = await fetch('/ways/comment', {
     method: "POST",
@@ -78,7 +70,7 @@ btnSubmitComment?.addEventListener('click', async () => {
     })
   });
   const {newComment, newRating} = await response.json();
-  rating.textContent = newRating
+  rating.textContent = newRating;
   // console.log(newComment)
   comentList.innerHTML = renderNewComment(newComment) + comentList.innerHTML;
   commentMessage.value = '';
@@ -143,8 +135,8 @@ function addAdmin() {
         role: "admin"
       })
     });
-    const {editUser} = await response.json();
-    if(editUser) {
+    const {user} = await response.json();
+    if(user) {
       adm.innerHTML = `<button id="${id}" class="btn btnToDelAdmin">Удалить права администратора</button>`
       // btnToAddAdmin[0].parentNode.removeChild(btnToAddAdmin[0]);
       // console.log(adm.innerHTML)
@@ -167,8 +159,8 @@ function addAdmin() {
         role: "user"
       })
     });
-    const {editUser} = await response.json();
-    if(editUser) {
+    const {user} = await response.json();
+    if(user) {
       adm.innerHTML = `<button id="${id}" class="btn btnToAddAdmin">Установить права администратора</button>`
       // btnToDelAdmin[0].parentNode.removeChild(btnToDelAdmin[0]);
       btnToAddAdmin = [...document.getElementsByClassName('btnToAddAdmin')];

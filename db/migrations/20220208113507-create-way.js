@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       url_img: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       xy_start: {
         type: Sequelize.STRING

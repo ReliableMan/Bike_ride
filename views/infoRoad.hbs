@@ -2,32 +2,36 @@
 
 
 
-<div class="mainConteiner" id="{{way.id}}">
-  <div id="map" style="width: 700px; height: 700px"></div>
-  <div class="inform">
-    <h2> {{way.title}} </h2>
-    <h3 id="rating">Рейтинг: {{way.rating}}</h3>
-    <h3>Населенный пункт: {{way.city}} </h3>
-    <p>Длина маршрута: {{way.distance}}</p>
-    <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
-    <p style="max-width: 500px;">{{way.body}}</p>
-    <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
-      </select></p>
-    <textarea name="message" class="message"></textarea>
+
+ <div class="mainConteiner" id="{{way.id}}">
+      <div id="map" style="width: 700px; height: 700px"></div>
+      <div class="inform">
+        <h2> {{way.title}} </h2>>
+        <h3 id="rating">Рейтинг: {{way.rating}}</h3>
+        <h3>Населенный пункт: {{way.city}} </h3>
+        <p>Длина маршрута:  {{way.distance}}</p>
+        <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
+        <p style="max-width: 500px;">{{way.body}}</p>
+        <div id="{{way.xy_start}}/{{way.xy_end}}" class="coordInfo"></div>
+        <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
+                              <option value="5">5</option>
+                              <option value="4">4</option>
+                              <option value="3">3</option>
+                              <option value="2">2</option>
+                              <option value="1">1</option>
+                            </select></p>
+        <textarea name="message" class="message"></textarea>
 
 
     <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
-    {{#if userlogIn.isGrantDelWay}}
-    {{!-- <button id="btnComment btnDeleteWay" type="submit" name="submit_btn"><a href="/ways/delete/{{way.id}}">Удалить
-        маршрут <button></button></a> </button> --}}
-    <a href="/ways/delete/{{way.id}}">Удалить маршрут </a>
+  {{#if userlogIn.isEditor}}
 
-    {{/if}}
+    <span><a href="/ways/delete/{{way.id}}">Удалить маршрут </a></span>   
+    <span><a href="/ways/edit/{{way.id}}">Редактировать маршрут </a></span>
+    
+ {{/if}}
+
+
   </div>
 
 </div>
