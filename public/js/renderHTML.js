@@ -13,9 +13,10 @@ function renderWayList(way) {
 
 
 function renderNewComment(newComment) {
-  return `<li class="commentList" style="border: 1px solid black;">
+  return `<li class="commentList">
               <div id="comment"></div>
-                  <h3><b><a href="/user/${newComment.user_id}">User:${newComment.username}</a></b></h3> <span>${newComment.rating}</span>
-                  <p>Отзыв: ${newComment.text}</p>
+                  <h3><b><a href="/user/${newComment.user_id}">User:${newComment.username}</a></b></h3> <span>Оценка: ${newComment.rating}</span>
+                  <p class="pshka">${newComment.text}</p>
                   <a class="delComment" href="/ways/comment/delete/${newComment.id}">Удалить комментарий </a> </li>`
 }
+

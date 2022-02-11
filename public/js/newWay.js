@@ -109,23 +109,23 @@ async function editEntryesWay(arrCoordEdit = []) {
 // console.log(obj) // нам нужна подобная строка формата "56.33821041, 36.74362897"
 
 
-// const timeFill = setInterval(() => {
-//   const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-//   if (inputFill[0] && inputFill[1]) {
-//     inputFill[0].value = obj.start
-//     inputFill[1].value = obj.end
+const timeFill = setInterval(() => {
+  const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
+  if (inputFill[0] && inputFill[1]) {
+    inputFill[0].value = obj.start
+    inputFill[1].value = obj.end
 
-//     // let xEdit, yEdit;
-//     // // console.log(inputEdit[0].value)
-//     // xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
-//     // if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
-//     //   if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
-//     //     yEdit = inputEdit[1].value.split(',').map(el=> parseFloat(el));
-//     //     if (yEdit[0]) arrCoordEdit.push(yEdit);
-//         clearInterval(timeFill);
-//     //     btnEditWay[0]?.addEventListener('click', () => {
-//     //       editEntryesWay(arrCoordEdit);
-//     //     })
-//     //   }
-//   }
-// }, 100);
+    // let xEdit, yEdit;
+    // // console.log(inputEdit[0].value)
+    // xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
+    // if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
+    //   if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
+    //     yEdit = inputEdit[1].value.split(',').map(el=> parseFloat(el));
+    //     if (yEdit[0]) arrCoordEdit.push(yEdit);
+        clearInterval(timeFill);
+    //     btnEditWay[0]?.addEventListener('click', () => {
+    //       editEntryesWay(arrCoordEdit);
+    //     })
+    //   }
+  }
+}, 100);

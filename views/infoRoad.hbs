@@ -6,7 +6,7 @@
  <div class="mainConteiner" id="{{way.id}}">
       <div id="map" style="width: 700px; height: 700px"></div>
       <div class="inform">
-        <h2> {{way.title}} </h2>>
+        <h2> {{way.title}} </h2>
         <h3 id="rating">Рейтинг: {{way.rating}}</h3>
         <h3>Населенный пункт: {{way.city}} </h3>
         <p>Длина маршрута:  {{way.distance}}</p>
@@ -26,8 +26,8 @@
     <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
   {{#if userlogIn.isEditor}}
 
-    <span><a href="/ways/delete/{{way.id}}">Удалить маршрут </a></span>   
-    <span><a href="/ways/edit/{{way.id}}">Редактировать маршрут </a></span>
+    <span><a style="color: black;" href="/ways/delete/{{way.id}}">Удалить маршрут </a></span>   
+    <span><a style="color: black;" href="/ways/edit/{{way.id}}">Редактировать маршрут </a></span>
     
  {{/if}}
 
