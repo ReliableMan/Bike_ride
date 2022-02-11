@@ -11,7 +11,7 @@ const btnEnterEditProfile = [...document.getElementsByClassName('btnEnterEditPro
 
   selector?.addEventListener('click', async () => {
     const response = await fetch(`http://localhost:3000/ways/sort/${selector.value}`, {
-        method: "GET"});
+        method: "GET", credentials: 'include'});
       const {ways} = await response.json();
 
       routesList.innerHTML = '';
@@ -43,6 +43,7 @@ function deletComment() {
       event.preventDefault();
       const response = await fetch(del.href, {
         method: "DELETE",
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         }
@@ -60,6 +61,7 @@ btnSubmitComment?.addEventListener('click', async () => {
 
   const response = await fetch('/ways/comment', {
     method: "POST",
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -99,6 +101,7 @@ btnEnterEditProfile[0]?.addEventListener('click', async () => {
   // console.log(obj, formControl2[0].value)
   const response = await fetch(`/user/edit/${btnEnterEditProfile[0].id}`, {
     method: "PUT",
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -127,6 +130,7 @@ function addAdmin() {
     const id = btnToAddAdmin[0].id;
     const response = await fetch(`/user/admin/${btnToAddAdmin[0].id}`, {
       method: "PUT",
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -151,6 +155,7 @@ function addAdmin() {
     const id = btnToDelAdmin[0].id;
     const response = await fetch(`/user/admin/${btnToDelAdmin[0].id}`, {
       method: "PUT",
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },

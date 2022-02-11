@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
@@ -20,7 +21,7 @@ let redisClient = redis.createClient();
 app.set('view engine', 'hbs');
 // Сообщаем express, что шаблона шаблонизаторая (вью) находятся в папке "ПапкаПроекта/views".
 app.set('views', path.join(__dirname, 'views'));
-
+app.set('trust proxy', true);
 // Подключаем middleware morgan с режимом логирования "dev", чтобы для каждого HTTP-запроса на сервер в консоль выводилась информация об этом запросе.
 app.use(logger('dev'));
 // Подключаем middleware, которое сообщает epxress, что в папке "ПапкаПроекта/public" будут находится статические файлы, т.е. файлы доступные для скачивания из других приложений.
@@ -29,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 // Подключаем middleware, которое позволяет читать переменные JavaScript, сохранённые в формате JSON в body HTTP-запроса.
 app.use(express.json());
-
+app.use(cors());
 
 // записывает в переменную req.session.user данные из прилетевшей куки, если такаяже была найдена в базе данных для кук.
 //  если куки нету или она не найдена в session storage, то req.session.user будет равно unfefined

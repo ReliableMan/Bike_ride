@@ -42,6 +42,7 @@ async function createEntryesWay(arrCoord = []) {
   console.log(dataNewWay);
   const response = await fetch('/ways/new/add', {
     method: "POST",
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -92,6 +93,7 @@ async function editEntryesWay(arrCoordEdit = []) {
   console.log(dataWayEdit);
   const response = await fetch(`/ways/edit/${btnEditWay[0].id}`, {
     method: "PUT",
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
