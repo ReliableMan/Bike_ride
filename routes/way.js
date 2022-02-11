@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {Way, User, Comment, UserInfo} = require('../db/models/');
-const {sortWays, sortRating} = require('../middleWares/sortWays')
+const {sortWays, sortRating, sortDistance } = require('../middleWares/sortWays')
 const {ratingController} = require('../controllers/ratingController')
 
 
@@ -71,6 +71,7 @@ router.get('/sort/:id', async (req, res) => {
     // }));
     // console.log('-------------------------------------------------54', req.params?.id == 1 )
     if(req.params?.id == 1) ways = sortRating(ways)
+    if(req.params?.id == 3) ways = sortDistance(ways)
     // console.log(ways)
   } catch (error) {
     return res.render('error', {

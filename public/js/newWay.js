@@ -112,8 +112,8 @@ async function editEntryesWay(arrCoordEdit = []) {
 const timeFill = setInterval(() => {
   const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
   if (inputFill[0] && inputFill[1]) {
-    inputFill[0].value = obj.start
-    inputFill[1].value = obj.end
+    // inputFill[0].value = obj.start
+    // inputFill[1].value = obj.end
 
     // let xEdit, yEdit;
     // // console.log(inputEdit[0].value)
