@@ -11,6 +11,7 @@
         <p>Длина маршрута:  {{way.distance}}</p>
         <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
         <p style="max-width: 500px;">{{way.body}}</p>
+        <div id="{{way.xy_start}}/{{way.xy_end}}" class="coordInfo"></div>
         <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
                               <option value="5">5</option>
                               <option value="4">4</option>
@@ -22,10 +23,11 @@
 
 
     <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
-  {{#if userlogIn.isGrantDelWay}}
+  {{#if userlogIn.isEditor}}
     {{!-- <button id="btnComment btnDeleteWay" type="submit" name="submit_btn"><a href="/ways/delete/{{way.id}}">Удалить маршрут <button></button></a> </button> --}}
-     <a href="/ways/delete/{{way.id}}">Удалить маршрут </a>
-
+    <span><a href="/ways/delete/{{way.id}}">Удалить маршрут </a></span>   
+    <span><a href="/ways/edit/{{way.id}}">Редактировать маршрут </a></span>
+    
  {{/if}}
   </div>
 

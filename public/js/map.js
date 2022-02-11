@@ -1,5 +1,11 @@
-
 /* eslint-disable max-len */
+const coordInfo = document.getElementsByClassName('coordInfo');
+const arr5 = coordInfo[0]?.id
+const obj = {start: arr5?.split('/')[0].replace('_', ', ') || 'Москва, метро Сокол', end: arr5?.split('/')[1].replace('_', ', ') || 'Москва, метро Павелецкая'}
+
+console.log(obj) // нам нужна подобная строка формата "56.33821041, 36.74362897"
+
+
 ymaps.ready(init);
 function init() {
   const { geolocation } = ymaps;
@@ -36,8 +42,9 @@ function init() {
   });
   const multiRoute = new ymaps.multiRouter.MultiRoute({
     referencePoints: [
-      'Москва, метро Сокол',
-      'Москва, метро Павелецкая',
+      // 'Москва, метро Сокол',
+      // 'Москва, метро Павелецкая',
+      obj.start || 'Москва, метро Сокол', obj.end || 'Москва, метро Павелецкая'
     ],
   });
 
@@ -59,23 +66,4 @@ function init() {
     },
   });
 }
-// const arr = [];
-// const time = setInterval(() => {
-//   const input = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-//   if (input.length && input[0].value !== '<empty string>'
-//     && input[0].value !== '') {
-//     let x; let
-//       y;
-//     x = input[0].value.split(',').map((el) => parseFloat(el));
-//     if (!isNaN(x[0])) arr.push(x);
-//     if (input.length && input[1].value !== '<empty string>' && input[1].value !== '') {
-//       y = input[1].value.split(',').map((el) => parseFloat(el));
-//       if (y[0]) arr.push(y);
-//       clearInterval(time);
-//       let tochkaA = arr[0];
-//       let tochkaB = arr.pop();
-//       console.log(...tochkaA);
-//       console.log(...tochkaB);
-//     }
-//   }
-// }, 100);
+

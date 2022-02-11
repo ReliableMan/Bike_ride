@@ -22,7 +22,7 @@
   </div>
   <div class="aboutMe">
     <button id="{{user.id}}" class="btn btnEnterEditProfile">Редактировать</button>
-    {{#if isAdmin}}
+    {{#if userlogIn.isAdmin}}
       <div id="adm">
       {{#if user.userRole}}
       <button id="{{user.id}}" class="btn btnToAddAdmin">Установить права администратора</button>
