@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
+let poleVvoda = document.getElementsByClassName('poleVvoda')
 const coordInfo = document.getElementsByClassName('coordInfo');
 const arr5 = coordInfo[0]?.id
 const obj = {start: arr5?.split('/')[0].replace('_', ', ') || 'Москва, метро Сокол', end: arr5?.split('/')[1].replace('_', ', ') || 'Москва, метро Павелецкая'}
-const poleVvoda = document.getElementsByClassName('poleVvoda')
 console.log(obj) // нам нужна подобная строка формата "56.33821041, 36.74362897"
 const wayImage = document.getElementById('wayImage');
 const wayTitle = document.getElementById('wayTitle');
@@ -36,6 +36,7 @@ function init() {
     });
     myMap.geoObjects.add(result.geoObjects);
   });
+  poleVvoda = document.getElementsByClassName('poleVvoda')
   if (poleVvoda[0].id === 'info') {
   // geolocation.get({
   //   provider: 'browser',
