@@ -22,10 +22,11 @@ router.get('/', async (req, res) => {
     // })
 
   } catch (error) {
-    return res.render('error', {
-      message: 'Не удалось получить записи из базы данных.',
-      error: {},
-    });
+    // return res.render('error', {
+    //   message: 'Необходимо авторизоваться',
+    //   error: {},
+    // });
+    return res.render('signUp');
   }
 
 //   console.log(user);
@@ -72,6 +73,7 @@ router.get('/sort/:id', async (req, res) => {
     // console.log('-------------------------------------------------54', req.params?.id == 1 )
     if(req.params?.id == 1) ways = sortRating(ways)
     if(req.params?.id == 3) ways = sortDistance(ways)
+    // console.log(ways)
     // console.log(ways)
   } catch (error) {
     return res.render('error', {

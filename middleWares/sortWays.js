@@ -22,8 +22,10 @@ exports.sortRating = (ways) => {
     return ways.sort((a, b) => b.rating - a.rating)
   };
 exports.sortDistance = (ways) => {
-    
-      return ways.sort((a, b) => Number(b.distance) - Number(a.distance))
+    // ways.forEach(element => {
+    //   console.log('---------------------', parseInt(element.distance, 10))
+    // });
+      return ways.sort((a, b) => parseInt(b.distance) - parseInt(a.distance))
     };
 
 

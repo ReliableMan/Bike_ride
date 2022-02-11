@@ -37,7 +37,7 @@ async function createEntryesWay(arrCoord = []) {
     wayText: wayText.value,
     xy1: arrCoord[0],
     xy2: arrCoord.pop(),
-    distance: distance[0]?.textContent || 'Расстояние неопределено'
+    distance: distance[0]?.textContent || 0
   }
   console.log(dataNewWay);
   const response = await fetch('/ways/new/add', {
@@ -87,7 +87,7 @@ async function editEntryesWay(arrCoordEdit = []) {
     wayText: wayText.value,
     xy1: arrCoordEdit[0] || obj.start,
     xy2: arrCoordEdit.pop() || obj.end,
-    distance: distanceEdit[0]?.textContent|| obj.dist || 'Расстояние неопределено'
+    distance: distanceEdit[0]?.textContent|| obj.dist || 0,
   }
   console.log(dataWayEdit);
   const response = await fetch(`/ways/edit/${btnEditWay[0].id}`, {
@@ -113,7 +113,7 @@ async function editEntryesWay(arrCoordEdit = []) {
 
 
 
-if (poleVvoda[0].id === 'edit') {
+if (poleVvoda[0]?.id === 'edit') {
   const timeFill = setInterval(() => {
     const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
     if (inputFill[0] && inputFill[1]) {

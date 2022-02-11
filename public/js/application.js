@@ -56,7 +56,7 @@ function deletComment() {
 
 
 btnSubmitComment?.addEventListener('click', async () => {
-  const rating = document.getElementById('rating');
+  const ratingAll = document.getElementById('ratingAll');
 
   const response = await fetch('/ways/comment', {
     method: "POST",
@@ -70,7 +70,7 @@ btnSubmitComment?.addEventListener('click', async () => {
     })
   });
   const {newComment, newRating} = await response.json();
-  rating.textContent = newRating;
+  ratingAll.textContent = newRating;
   // console.log(newComment)
   comentList.innerHTML = renderNewComment(newComment) + comentList.innerHTML;
   commentMessage.value = '';
