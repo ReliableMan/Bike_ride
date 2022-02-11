@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="/stylesheets/signUpForm.css">
   <link rel="stylesheet" href="/stylesheets/main.css">
   <link rel="stylesheet" href="/stylesheets/user.css">
+  <link rel="stylesheet" href="/stylesheets/infoRoad.css">
+  <link rel="stylesheet" href="/stylesheets/userProfile.css">
   <title>Велопрогулка</title>
   <script defer src='/js/application.js'></script>
   <script defer src='/js/renderHTML.js'></script>
@@ -35,14 +37,14 @@
       <nav class="clearfix mar-b-1">
         <ul class="no-bullets no-margin no-padding right">
           {{#if username}}
-          <li class="pipe-separate t-light-green left"><a href="/user/{{userlogIn.id}}">Hi,{{username}}</a></li>
-          <li class="pipe-separate t-light-green left"><a href="/user/signout">logOut</a></li>
-          <li class="pipe-separate t-light-green left"><a href="/">home</a></li>
-          <li class="pipe-separate t-light-green left"><a href="/ways/new">Новый маршрут</a></li>
+          <li class="pipe-separate t-light-green left"><a href="/user/{{userlogIn.id}}">Hi, {{username}}</a></li>
+          <li class="pipe-separate t-light-green left"><a href="/user/signout">LogOut</a></li>
+          <li class="pipe-separate t-light-green left"><a href="/">Home</a></li>
+          <li class="pipe-separate t-light-green left"><a href="/ways/new">New route</a></li>
           {{else }}
           <li class="pipe-separate t-light-green left"><a href='/user/signup'>Registration</a></li>
           <li class="pipe-separate t-light-green left"><a href='/user/signin'>LogIn</a></li>
-          <li class="pipe-separate t-light-green left"><a href="/">home</a></li>
+          <li class="pipe-separate t-light-green left"><a href="/">Home</a></li>
           {{/if}}
         </ul>
       </nav>
