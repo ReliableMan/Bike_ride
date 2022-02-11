@@ -3,33 +3,35 @@
 
 
 
- <div class="mainConteiner" id="{{way.id}}">
-      <div id="map" style="width: 700px; height: 700px"></div>
-      <div class="inform">
-        <h2> {{way.title}} </h2>
-        <h3 id="ratingAll">Рейтинг: {{way.rating}}</h3>
-        <h3>Населенный пункт: {{way.city}} </h3>
-        <p>Длина маршрута:  {{way.distance}}</p>
-        <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
-        <p style="max-width: 500px;">{{way.body}}</p>
-        <div id="{{way.xy_start}}/{{way.xy_end}}" class="coordInfo"></div>
-        <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
-                              <option value="5">5</option>
-                              <option value="4">4</option>
-                              <option value="3">3</option>
-                              <option value="2">2</option>
-                              <option value="1">1</option>
-                            </select></p>
-        <textarea name="message" class="message"></textarea>
+<div class="mainConteiner" id="{{way.id}}">
+  <div id="map" style="width: 700px; height: 700px"></div>
+  <div class="inform">
+    <h2> {{way.title}} </h2>
+    <h3 id="ratingAll">Рейтинг: {{way.rating}}</h3>
+    <h3>Населенный пункт: {{way.city}} </h3>
+    <p>Длина маршрута: {{way.distance}}</p>
+    <p>Автор: <a href="/user/{{way.user_id}}">User:{{way.nameUser}}</a></p>
+    <p style="max-width: 500px;">{{way.body}}</p>
+    <div id="{{way.xy_start}}/{{way.xy_end}}" class="coordInfo"></div>
+    <p>Оставить отзыв: <select id="rating" name="selectorRating" class="selectorRating">
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+      </select></p>
+    <textarea name="message" class="message"></textarea>
 
 
     <button id="btnComment" type="submit" name="submit_btn" value="Отправить">Отправить</button>
-  {{#if userlogIn.isEditor}}
+    {{#if userlogIn.isEditor}}
 
-    <span><a style="color: black;" href="/ways/delete/{{way.id}}">Удалить маршрут </a></span>   
-    <span><a style="color: black;" href="/ways/edit/{{way.id}}">Редактировать маршрут </a></span>
-    <div id="info" class="poleVvoda"></div>
- {{/if}}
+
+    <span><a class="deleteRoad" href="/ways/delete/{{way.id}}">Удалить маршрут</a> | <a class="editRoad" href="/ways/edit/{{way.id}}">Редактировать маршрут</a></span>
+
+
+    {{/if}}
+
 
 
   </div>
@@ -38,6 +40,7 @@
 
 
 <div class="boxComment">
+
 <div class="otziyv">
   <h2>Отзывы:</h2>
 <div class="footer-line"></div>
@@ -56,4 +59,5 @@
   {{/each}}
 </ul>
 {{/if}}
+
 </div>
