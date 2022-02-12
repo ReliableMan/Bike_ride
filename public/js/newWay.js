@@ -1,4 +1,4 @@
-poleVvoda = document.getElementsByClassName('poleVvoda')
+
 
 const arrCoord = []
 
@@ -13,7 +13,6 @@ const arrCoord = []
         y = input[1].value.split(',').map(el=> parseFloat(el));
         if (y[0]) arrCoord.push(y);
         clearInterval(time);
-        console.log(arrCoord)
         btnNewWay[0]?.addEventListener('click', () => {
           createEntryesWay(arrCoord);
         })
@@ -21,15 +20,8 @@ const arrCoord = []
   }
 }, 100);
 
-
-
-
-
-
-
 async function createEntryesWay(arrCoord = []) {
   const distance = [...document.getElementsByClassName('ymaps-2-1-79-transport-pin__text')];
-  console.log(distance)
   const dataNewWay = {
     wayTitle: wayTitle.value,
     wayCity: wayCity.value,
@@ -39,7 +31,6 @@ async function createEntryesWay(arrCoord = []) {
     xy2: arrCoord.pop(),
     distance: distance[0]?.textContent || 0
   }
-  console.log(dataNewWay);
   const response = await fetch('/ways/new/add', {
     method: "POST",
     credentials: 'include',
@@ -52,17 +43,12 @@ async function createEntryesWay(arrCoord = []) {
   window.location = `http://localhost:3000/ways/${newWay.id}`;
 }
 
-
-
-
-
 const arrCoordEdit = []
 const timeEdit = setInterval(() => {
   const inputEdit = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
   if (inputEdit.length && inputEdit[0].value !== `<empty string>`
   && inputEdit[0].value !=='' ) {
     let xEdit, yEdit;
-    // console.log(inputEdit[0].value)
     xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
     if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
       if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
@@ -76,8 +62,6 @@ const timeEdit = setInterval(() => {
   }
 }, 100);
 
-
-
 async function editEntryesWay(arrCoordEdit = []) {
   const distanceEdit = [...document.getElementsByClassName('ymaps-2-1-79-transport-pin__text')];
   const dataWayEdit = {
@@ -90,7 +74,6 @@ async function editEntryesWay(arrCoordEdit = []) {
     xy2: arrCoordEdit.pop() || obj.end,
     distance: distanceEdit[0]?.textContent|| obj.dist || 0,
   }
-  console.log(dataWayEdit);
   const response = await fetch(`/ways/edit/${btnEditWay[0].id}`, {
     method: "PUT",
     credentials: 'include',
@@ -100,67 +83,6 @@ async function editEntryesWay(arrCoordEdit = []) {
     body: JSON.stringify(dataWayEdit)
   });
   const {way} = await response.json();
-  window.location = `http://localhost:3000/ways/${way.id}`;
+  window.location = `http://localhost:3000/ways/${btnEditWay[0].id}`;
 }
 
-
-// const coordInfo = document.getElementsByClassName('coordInfo');
-// const arr5 = coordInfo[0].id
-// const obj = {start: arr5.split('/')[0].replace('_', ', '), end: arr5.split('/')[1].replace('_', ', ')}
-
-// console.log(obj) // нам нужна подобная строка формата "56.33821041, 36.74362897"
-// console.log(poleVvoda[0].id)
-
-
-
-
-
-if (poleVvoda[0]?.id === 'edit') {
-  const timeFill = setInterval(() => {
-    const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-    if (inputFill[0] && inputFill[1]) {
-      // inputFill[0].value = obj.start
-      // inputFill[1].value = obj.end
-
-
-      // if (inputFill[1].value === '') run()
-      // let xEdit, yEdit;
-      // // console.log(inputEdit[0].value)
-      // xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
-      // if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
-      //   if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
-      //     yEdit = inputEdit[1].value.split(',').map(el=> parseFloat(el));
-      //     if (yEdit[0]) arrCoordEdit.push(yEdit);
-          clearInterval(timeFill);
-      //     btnEditWay[0]?.addEventListener('click', () => {
-      //       editEntryesWay(arrCoordEdit);
-      //     })
-      //   }
-    }
-  }, 100);
-}
-
-// <<<<<<< newRoad5
-// =======
-
-// const timeFill = setInterval(() => {
-//   const inputFill = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-//   if (inputFill[0] && inputFill[1]) {
-//     // inputFill[0].value = obj.start
-//     // inputFill[1].value = obj.end
-
-//     // let xEdit, yEdit;
-//     // // console.log(inputEdit[0].value)
-//     // xEdit = inputEdit[0].value.split(',').map(el=> parseFloat(el));
-//     // if (!isNaN(xEdit[0])) arrCoordEdit.push(xEdit);
-//     //   if (inputEdit.length && inputEdit[1].value !== `<empty string>` && inputEdit[1].value !=='') {
-//     //     yEdit = inputEdit[1].value.split(',').map(el=> parseFloat(el));
-//     //     if (yEdit[0]) arrCoordEdit.push(yEdit);
-//         clearInterval(timeFill);
-//     //     btnEditWay[0]?.addEventListener('click', () => {
-//     //       editEntryesWay(arrCoordEdit);
-//     //     })
-//     //   }
-//   }
-// }, 100);
-// >>>>>>> main
