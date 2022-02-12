@@ -8,6 +8,20 @@ const infoWayOne = [...document.getElementsByClassName('mainConteiner')];
 const comentList = document.getElementById('comentList');
 const btnEditProfile = [...document.getElementsByClassName('btnEditProfile')];
 const btnEnterEditProfile = [...document.getElementsByClassName('btnEnterEditProfile')];
+const poleVvoda = document.getElementsByClassName('poleVvoda');
+
+const coordInfo = document.getElementsByClassName('coordInfo');
+const arr5 = coordInfo[0]?.id
+const obj = {start: arr5?.split('/')[0].replace('_', ', ') || 'Москва, метро Сокол', end: arr5?.split('/')[1].replace('_', ', ') || 'Москва, метро Павелецкая', dist: arr5?.split('/')[2] || 'расстояние не определено'}
+const wayImage = document.getElementById('wayImage');
+const wayTitle = document.getElementById('wayTitle');
+const wayCity = document.getElementById('wayCity');
+const wayText = document.getElementById('wayText');
+
+const btnNewWay = [...document.getElementsByClassName('btnNewWay')];
+const btnEditWay = [...document.getElementsByClassName('btnEditWay')];
+
+
 
   selector?.addEventListener('click', async () => {
     const response = await fetch(`http://localhost:3000/ways/sort/${selector.value}`, {
@@ -34,7 +48,6 @@ infoBtn?.forEach((el,index) => {
   });
 });
 
-
 function deletComment() {
   const delComment = [...document.getElementsByClassName('delComment')];
   const commentList = [...document.getElementsByClassName('commentList')];
@@ -54,7 +67,7 @@ function deletComment() {
     });
   });
 }
-
+deletComment()
 
 btnSubmitComment?.addEventListener('click', async () => {
   const ratingAll = document.getElementById('ratingAll');
@@ -73,7 +86,6 @@ btnSubmitComment?.addEventListener('click', async () => {
   });
   const {newComment, newRating} = await response.json();
   ratingAll.textContent = newRating;
-  // console.log(newComment)
   comentList.innerHTML = renderNewComment(newComment) + comentList.innerHTML;
   commentMessage.value = '';
   selectorRating.value = 5;
@@ -88,17 +100,8 @@ btnEditProfile[0]?.addEventListener('click', () => {
 
 btnEnterEditProfile[0]?.addEventListener('click', async () => {
   const formControl = [...document.getElementsByClassName('form-control')]
-  // const formControl2 = [...document.getElementsByClassName('about_me')]
   const aboutMeInput = document.getElementById('about_me');
-//  const obj = {
-//     city: formControl[2].value,
-//     bike: formControl[0].value,
-//     about_me: aboutMeInput.value,
-//     user_id: btnEnterEditProfile[0].id,
-//     age: formControl[0].value,
-//     role: undefined || "user"
-//   }
-  // console.log(obj, formControl2[0].value)
+
   const response = await fetch(`/user/edit/${btnEnterEditProfile[0].id}`, {
     method: "PUT",
     credentials: 'include',
@@ -120,14 +123,13 @@ btnEnterEditProfile[0]?.addEventListener('click', async () => {
 
 
 function addAdmin() {
-  // console.log(234243)
   const adm = document.getElementById('adm')
   let btnToAddAdmin = [...document.getElementsByClassName('btnToAddAdmin')];
   let btnToDelAdmin = [...document.getElementsByClassName('btnToDelAdmin')];
-  // console.log(btnToAddAdmin)
+
   btnToAddAdmin[0]?.addEventListener('click', async () => {
-    // console.log(btnToAdmin[0].id)
     const id = btnToAddAdmin[0].id;
+
     const response = await fetch(`/user/admin/${btnToAddAdmin[0].id}`, {
       method: "PUT",
       credentials: 'include',
@@ -142,8 +144,6 @@ function addAdmin() {
     const {user} = await response.json();
     if(user) {
       adm.innerHTML = `<button id="${id}" class="btn btnToDelAdmin">Удалить права администратора</button>`
-      // btnToAddAdmin[0].parentNode.removeChild(btnToAddAdmin[0]);
-      // console.log(adm.innerHTML)
       btnToDelAdmin = [...document.getElementsByClassName('btnToDelAdmin')];
       addAdmin();
       console.log(`Пользователю ${id} Добавлены права администратора`)
@@ -151,8 +151,8 @@ function addAdmin() {
   })
 
   btnToDelAdmin[0]?.addEventListener('click', async () => {
-    // console.log('------------------', btnToDelAdmin[0].id)
     const id = btnToDelAdmin[0].id;
+
     const response = await fetch(`/user/admin/${btnToDelAdmin[0].id}`, {
       method: "PUT",
       credentials: 'include',
@@ -167,18 +167,11 @@ function addAdmin() {
     const {user} = await response.json();
     if(user) {
       adm.innerHTML = `<button id="${id}" class="btn btnToAddAdmin">Установить права администратора</button>`
-      // btnToDelAdmin[0].parentNode.removeChild(btnToDelAdmin[0]);
       btnToAddAdmin = [...document.getElementsByClassName('btnToAddAdmin')];
       addAdmin();
       console.log(`У пользователя ${id} удалены права администратора`)
     }
 })
-
-
-  
-
-deletComment()
-
 
 
 

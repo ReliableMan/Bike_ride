@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {Way, User, Comment} = require('../db/models/');
+const {Comment} = require('../db/models/');
 
 exports.ratingController = async (ways1) => {
   return await Promise.all(ways1.map( async (el) => {
