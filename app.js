@@ -5,13 +5,14 @@ const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
 require('dotenv').config();
+
 // Импортируем созданный в отдельный файлах рутеры.
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const waysRouter = require('./routes/way.js');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 // подключаем БД базы для хранения кукисов (session storage) Используем базу данных Redis v3
 const redis = require('redis');
 let RedisStore = require('connect-redis')(session);

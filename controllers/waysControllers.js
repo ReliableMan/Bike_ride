@@ -1,4 +1,3 @@
-const router = require('express').Router();
 const {Way, User, Comment, UserInfo} = require('../db/models/');
 const {sortWays, sortRating, sortDistance } = require('../middleWares/sortWays');
 const {ratingController} = require('./ratingController');
@@ -50,7 +49,7 @@ exports.renderNewComment =  async (req, res) => {
     user = await User.findOne({ where: { name: res.locals?.username }, raw: true });
     newComment = await Comment.create({ text: req.body.text, rating: req.body.rating, user_id: user.id, way_id: req.body.way_id},{returning: true,plain: true});
     const comment = await Comment.findAll({where: {way_id: req.body.way_id}, raw: true});
-    newRating = Number((comment.reduce((acc, el) => acc+= el.rating, 0) / comment.length).toFixed(2)) || 0; //'рейтинг отсутствует';
+    newRating = Number((comment.reduce((acc, el) => acc+= el.rating, 0) / comment.length).toFixed(2)) || 0;
     newComment.dataValues.username = user.name;
   } catch (error) {
     return res.json({ isUpdateSuccessful: false, errorMessage: 'Не удалось обновить запись в базе данных.' });
@@ -132,7 +131,7 @@ exports.renderFormInfoWay =  async (req, res) => {
     userlogIn = await User.findOne({where: {name: res.locals?.username}, include: [{model: UserInfo, attributes: ['role']}], raw: true});
     way = await Way.findOne({where:{id:req.params.id}, include: [{model: User, attribute: ['name']}], raw: true});
     comment = await Comment.findAll({where:{way_id: way.id}, order:[['createdAt', 'DESC']], include: [{model: User, attribute: ['name']}], raw: true});
-    way.rating = Number((comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2)) || 0 //'рейтинг отсутствует';
+    way.rating = Number((comment.reduce((acc, el) => acc += el.rating, 0) / comment.length).toFixed(2)) || 0;
     way.nameUser = way['User.name']
     comment.forEach(el => {
       if (el.user_id === userlogIn.id || userlogIn['UserInfo.role'] === 'admin'  || userlogIn.name === 'admin835') el.isGrantDelComm = true;

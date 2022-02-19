@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 ymaps.ready(init);
 function init() {
   const { geolocation } = ymaps;
@@ -23,9 +21,8 @@ function init() {
     });
     myMap.geoObjects.add(result.geoObjects);
   });
-  poleVvoda = document.getElementsByClassName('poleVvoda')
   if (poleVvoda[0].id === 'info' || poleVvoda[0].id === 'edit') {
-
+    console.log('---------------')
   } else {
     geolocation.get({
       provider: 'browser',
@@ -39,11 +36,7 @@ function init() {
     });
   }
   const multiRoute = new ymaps.multiRouter.MultiRoute({
-    referencePoints: [
-      // 'Москва, метро Сокол',
-      // 'Москва, метро Павелецкая',
-      obj.start || 'Москва, метро Сокол', obj.end || 'Москва, метро Павелецкая'
-    ],
+    referencePoints: [ obj.start || 'Москва, метро Сокол', obj.end || 'Москва, метро Павелецкая' ],
   });
 
   // Включение режима редактирования.

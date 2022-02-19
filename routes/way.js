@@ -24,18 +24,17 @@ router.delete('/comment/delete/:id', isAuth, isRedactor, commentDelete)
 
 router.post('/comment', isAuth, renderNewComment)
 
-router.get('/new', isAuth, renderFormNewWay)
+router.route('/new')
+      .get( isAuth, renderFormNewWay)
+      .post( isAuth, createNewWay)
 
 router.route('/edit/:id')
         .get( isAuth, isRedactor, renderFormEditWay)
         .put( editWay)
 
-router.post('/new/add', isAuth, createNewWay)
 
 router.get('/delete/:id',isAuth, isRedactor,  deleteWay)
 
 router.get('/:id',isAuth, renderFormInfoWay)
-
-
 
 module.exports = router;

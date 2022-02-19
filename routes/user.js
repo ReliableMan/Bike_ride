@@ -1,29 +1,20 @@
-// const {Way, User, UserInfo} = require('../db/models/');
-// const {sortWays, sortRating} = require('../middleWares/sortWays')
-// const {ratingController} = require('../controllers/ratingController') // 1111
-
 const express = require('express');
 const {
   checkUserAndCreateSession,
   createUserAndSession, destroySession,
-  isValid,
   renderSignInForm,
   renderSignUpForm,
   renderFormEditUser,
   editUserProfile,
   renderUserProfile,
   EditIsAdmin
-  // renderProfile
 } = require('../controllers/userControllers');
 
+const { isValid } = require('../middleWares/isValid')
 const { isAdmin } = require('../middleWares/isAdmin')
 const { isAuth } = require('../middleWares/isAuth')
 const { isRedactorProfile } = require('../middleWares/isRedactor')
 const router = express.Router();
-
-
-
-
 
 router
   .route('/signup')
@@ -42,11 +33,11 @@ router
 router.get('/signout', destroySession);
 
 router
-  .route('/edit/:id')                          //  1111 роутер перенаправлен
+  .route('/edit/:id')                          
   // Генерация страницы, редактирования профиля
   .get(isAuth, isRedactorProfile, renderFormEditUser)
   // Получение данных - редактирования профиля
-  .put(editUserProfile);
+  .put(isAuth, isRedactorProfile, editUserProfile);
 
 router
   .route('/admin/:id')
@@ -58,9 +49,9 @@ router
   // Генерация формы информации о пользователе
   .get(isAuth, renderUserProfile);
 
-router.get('/', async (req, res) => {
-  res.redirect('/') // если не введены данные то редиректим на главную страницу
-})
+router.get('/', async (req, res) => res.redirect('/'));
+// если не введены данные то редиректим на главную страницу
+
 
 module.exports = router;
 

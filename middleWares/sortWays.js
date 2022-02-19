@@ -1,8 +1,6 @@
-require('dotenv').config();
 const {Way} = require('../db/models/');
 
 exports.sortWays = async (id) => {
-
   switch (id) {
     case 1: // по рейтингу
       return ways1 = await Way.findAll({raw:true});

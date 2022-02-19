@@ -1,4 +1,3 @@
-require('dotenv').config();
 const {Comment} = require('../db/models/');
 
 exports.ratingController = async (ways1) => {

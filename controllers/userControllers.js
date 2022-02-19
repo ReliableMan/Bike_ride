@@ -2,11 +2,11 @@ const { User, UserInfo, Way } = require('../db/models');
 const bcrypt = require('bcrypt');
 const {ratingController} = require('./ratingController')
 
-exports.isValid = (req, res, next) => {
-  const { name, password, email } = req.body;
-  if(name && password && email) next();
-  else res.status(401).end();
-};
+// exports.isValid = (req, res, next) => {
+//   const { name, password, email } = req.body;
+//   if(name && password && email) next();
+//   else res.status(401).end();
+// };
 
 exports.createUserAndSession = async (req, res, next) => {
   const { name, password, email } = req.body;

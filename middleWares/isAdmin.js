@@ -1,7 +1,6 @@
-require('dotenv').config();
-const {Way, User, UserInfo} = require('../db/models/');
+const {User, UserInfo} = require('../db/models/');
 
-//  1111
+
 exports.isAdmin = async (req, res, next) => {
   let userlogIn;
   try {

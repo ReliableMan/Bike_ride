@@ -1,11 +1,10 @@
-
-
 const arrCoord = []
 
-  const time = setInterval(() => {
+const time = setInterval(() => {
   const input = [...document.getElementsByClassName('ymaps-2-1-79-route-panel-input__input')];
-  if (input.length && input[0].value !== `<empty string>`
-  && input[0].value !=='' ) {
+  if (input.length 
+    && input[0].value !== `<empty string>`
+    && input[0].value !=='' ) {
     let x, y;
     x = input[0].value.split(',').map(el=> parseFloat(el));
     if (!isNaN(x[0])) arrCoord.push(x);
@@ -31,7 +30,7 @@ async function createEntryesWay(arrCoord = []) {
     xy2: arrCoord.pop(),
     distance: distance[0]?.textContent || 0
   }
-  const response = await fetch('/ways/new/add', {
+  const response = await fetch('/ways/new', {
     method: "POST",
     credentials: 'include',
     headers: {
@@ -40,7 +39,7 @@ async function createEntryesWay(arrCoord = []) {
     body: JSON.stringify(dataNewWay)
   });
   const {newWay} = await response.json();
-  window.location = `http://localhost:3000/ways/${newWay.id}`;
+  window.location = `/ways/${newWay.id}`;
 }
 
 const arrCoordEdit = []
@@ -83,6 +82,6 @@ async function editEntryesWay(arrCoordEdit = []) {
     body: JSON.stringify(dataWayEdit)
   });
   const {way} = await response.json();
-  window.location = `http://localhost:3000/ways/${btnEditWay[0].id}`;
+  window.location = `/ways/${btnEditWay[0].id}`;
 }
 

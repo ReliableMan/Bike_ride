@@ -1,10 +1,7 @@
-require('dotenv').config();
-const router = require('express').Router();
 const {Way, User, UserInfo, Comment} = require('../db/models/');
 
-//  1111
 exports.isRedactor = async (req, res, next) => {
-  let way, comment, userlogIn, user;
+  let way, comment, userlogIn;
   try {
     if (req.params?.id) way = await Way.findOne({where: {id: req.params?.id}})
     if (req.params?.id) comment = await Comment.findOne({where:{id: req.params?.id}, raw: true});

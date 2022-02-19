@@ -1,18 +1,23 @@
 const selector = document.getElementsByName('differentSort')[0];
 const routesList = document.getElementsByClassName('routes')[0];
-let infoBtn = [...document.getElementsByClassName('btnInfo')];
+const infoBtn = [...document.getElementsByClassName('btnInfo')];
 const btnSubmitComment = document.getElementsByName('submit_btn')[0];
 const selectorRating = document.getElementsByName('selectorRating')[0];
 const commentMessage = document.getElementsByName('message')[0];
 const infoWayOne = [...document.getElementsByClassName('mainConteiner')];
-const comentList = document.getElementById('comentList');
 const btnEditProfile = [...document.getElementsByClassName('btnEditProfile')];
 const btnEnterEditProfile = [...document.getElementsByClassName('btnEnterEditProfile')];
 const poleVvoda = document.getElementsByClassName('poleVvoda');
+const comentList = document.getElementById('comentList');
 
+// собираем координаты и информацию с нового маршрута
 const coordInfo = document.getElementsByClassName('coordInfo');
 const arr5 = coordInfo[0]?.id
-const obj = {start: arr5?.split('/')[0].replace('_', ', ') || 'Москва, метро Сокол', end: arr5?.split('/')[1].replace('_', ', ') || 'Москва, метро Павелецкая', dist: arr5?.split('/')[2] || 'расстояние не определено'}
+const obj = {
+  start: arr5?.split('/')[0].replace('_', ', ') || 'Москва, метро Сокол', 
+  end: arr5?.split('/')[1].replace('_', ', ') || 'Москва, метро Павелецкая', 
+  dist: arr5?.split('/')[2] || 'расстояние не определено'
+};
 const wayImage = document.getElementById('wayImage');
 const wayTitle = document.getElementById('wayTitle');
 const wayCity = document.getElementById('wayCity');
@@ -23,28 +28,27 @@ const btnEditWay = [...document.getElementsByClassName('btnEditWay')];
 
 
 
-  selector?.addEventListener('click', async () => {
-    const response = await fetch(`http://localhost:3000/ways/sort/${selector.value}`, {
-        method: "GET", credentials: 'include'});
-      const {ways} = await response.json();
-
-      routesList.innerHTML = '';
-      ways.forEach(way => {
-        routesList.innerHTML += renderWayList(way)
-      });
-      infoBtn = [...document.getElementsByClassName('btnInfo')];
-      infoBtn?.forEach((el,index) => {
-        el.addEventListener('click', () => {
-          window.location = `http://localhost:3000/ways/${el.id}`;
-        });
-      });
+selector?.addEventListener('click', async () => {
+  const response = await fetch(`/ways/sort/${selector.value}`, {
+    method: "GET", credentials: 'include'
   });
+  const {ways} = await response.json();
+
+  routesList.innerHTML = '';
+  ways.forEach(way => routesList.innerHTML += renderWayList(way));
+  infoBtn = [...document.getElementsByClassName('btnInfo')];
+  infoBtn?.forEach((el,index) => {
+    el.addEventListener('click', () => {
+      window.location = `/ways/${el.id}`;
+    });
+  });
+});
 
 
 
 infoBtn?.forEach((el,index) => {
     el.addEventListener('click', () => {
-      window.location = `http://localhost:3000/ways/${el.id}`;
+      window.location = `/ways/${el.id}`;
   });
 });
 
@@ -94,7 +98,7 @@ btnSubmitComment?.addEventListener('click', async () => {
 
 
 btnEditProfile[0]?.addEventListener('click', () => {
-  window.location = `http://localhost:3000/user/edit/${btnEditProfile[0].id}`
+  window.location = `/user/edit/${btnEditProfile[0].id}`
 })
 
 
@@ -118,7 +122,7 @@ btnEnterEditProfile[0]?.addEventListener('click', async () => {
     })
   });
   const {} = await response.json();
-  window.location = `http://localhost:3000/user/${btnEnterEditProfile[0].id}`
+  window.location = `/user/${btnEnterEditProfile[0].id}`
 })
 
 
@@ -171,25 +175,7 @@ function addAdmin() {
       addAdmin();
       console.log(`У пользователя ${id} удалены права администратора`)
     }
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  })
 
 }
 addAdmin()
