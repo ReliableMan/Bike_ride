@@ -33,6 +33,7 @@ Bice Race — это приложение, в котором пользоват�
 <img width="1400" alt="Снимок экрана" src="https://lh3.googleusercontent.com/pw/AM-JKLUnitSpnE4MQI2BONL80pd3wux1kFb80Ra9TPPUUf2KwmfGE8UNAlMYp4B7TguQv1dEMkPycm5PjTEk_DsQ8ULi3RQURfdfnBbXkOvjL82_sAnDsMGzkAajMyUKrdGo51_wMzCQWfxArs2ZcAohohDZiw=w953-h744-no?authuser=0">
 <br/>
 <br/>
+
 ## Запуск приложения
 
 1. npm i
