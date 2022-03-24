@@ -1,118 +1,114 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Lato:100&display=swap");
 
-
-/* layout страница */
-.header{
+.header {
   display: flex;
-  height:80px;
-  justify-content: end;  /*выравнивание эл вдоль главной оси*/
-  padding: 10px;                    /* устанавливает внутренние отступы/поля со всех сторон элемента */ 
+  height: 80px;
+  justify-content: end;
+  padding: 10px;
   background-color: rgb(5, 59, 95);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
-.header__section{
+
+.header__section {
   display: flex;
-  align-items: center;              /*задает выравнивание элементов вдоль поперечной оси*/
+  align-items: center; 
 }
-.no-bullets{
+
+.no-bullets {
   display: flex;
-    margin: 0; /* Обнуляем значение отступов */
-    padding: 15px;
-    padding-left: 1050px;/*  потом помеять на адаптивный */
-  }
-.pipe-separate{
-  display: inline; /* Отображать как строчный элемент */
-  margin-right: 5px; /* Отступ слева */
-  padding: 5px; 
+  margin: 0; 
+  padding: 15px;
+  padding-left: 1050px; 
+}
+
+.pipe-separate {
+  display: inline; 
+  margin-right: 5px; 
+  padding: 5px;
   font-size: 20px;
 }
-a{
-  text-decoration:none;
+
+a {
+  text-decoration: none;
   color: white;
-  
 }
-.pipe-separate:hover{   /*:hover срабатывает, когда пользователь наводит на элемент мышью, но не обязательно активирует его*/ 
+
+.pipe-separate:hover {
   background-color: rgb(9, 117, 160);
-  border-radius: 4px;      /*свойство, позволяющее разработчикам определять, как скругляются границы блока*/
-  }
-  /* .main{
-    width: 100%;
-    height: 450px;
-    position: relative;
-  } */
-  .word{
-    /* width: 100%;
-    height: 100%; */
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    z-index: 10;
-    top: 100px;
-    width: 100%;
-    /* left: auto; */
-    /* padding-left: 20%; */
-  }
-  
-  .phrase{
-    font-family:'Courier New', Courier, monospace;
-    font-size: 40px;
-    color: rgb(249, 253, 199);
-  }
-.popular{
+  border-radius: 4px; 
+}
+
+.word {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 10;
+  top: 100px;
+  width: 100%;
+}
+
+.phrase {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 40px;
+  color: rgb(249, 253, 199);
+}
+
+.popular {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 30px;
   color: rgb(1, 57, 95);
   position: absolute;
   top: 365px;
-  /* left: 20px; */
 }
 
-
-/* main страница */
-.routes{
+.routes {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
   padding-top: 30px;
 }
-.sort{
-  
+
+.sort {
   display: flex;
   margin-left: 30px;
 }
-.rout{
+
+.rout {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.differentSort{
+
+.differentSort {
   width: 140px;
-height: 30px;
+  height: 30px;
 }
-.differentSort{
+
+.differentSort {
   width: 200px;
-  height:40px;
-  border-radius:15px;
+  height: 40px;
+  border-radius: 15px;
   color: rgb(5, 59, 95);
 }
 
-.mainConteiner{
+.mainConteiner {
   display: flex;
   flex-direction: row;
-  justify-content:center;
+  justify-content: center;
   padding-top: 30px;
   padding-left: 20px;
 }
 
-.inform{
+.inform {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 10px;
-  }
+  margin-left: 20px;
+}
